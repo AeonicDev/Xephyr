@@ -2,6 +2,7 @@ package com.dhlab.xephyr.bukkit.plugin;
 
 import com.dhlab.xephyr.bukkit.commands.CommandFramework;
 import com.dhlab.xephyr.bukkit.items.ItemManager;
+import com.dhlab.xephyr.bukkit.module.ModuleManager;
 import com.dhlab.xephyr.generic.Enableable;
 import org.bukkit.plugin.java.JavaPlugin;
 

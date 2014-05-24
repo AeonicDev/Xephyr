@@ -13,4 +13,5 @@ public interface YAMLSettable {
     public File getFile();
     public void loadSettings(File f);
     public void saveSettings(File f);
+    public void checkDefaults();
 }
