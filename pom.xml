@@ -11,7 +11,7 @@
     
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <jdk.version>1.7</jdk.version>
+        <project.jdk.version>1.7</project.jdk.version>
 
     </properties>
 
@@ -20,9 +20,11 @@
             <id>bukkit-repo</id>
             <url>http://repo.bukkit.org/content/groups/public/</url>
         </repository>
+        <!-- for the Tab API -->
         <repository>
-            <id>team-immersion</id>
-            <url>http://ci.teamimmersion.net/plugin/repository/everything/</url>
+            <id>comphenix-rep</id>
+            <name>Comphenix Repository</name>
+            <url>http://repo.comphenix.net/content/groups/public</url>
         </repository>
     </repositories>
 
@@ -33,6 +35,8 @@
             <version>1.7.9-R0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
+
+        <!-- For asynchronous MySQL -->
         <dependency>
             <groupId>org.jetlang</groupId>
             <artifactId>jetlang</artifactId>
@@ -69,8 +73,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.3.2</version>
                 <configuration>
-                    <source>${jdk.version}</source>
-                    <target>${jdk.version}</target>
+                    <source>${project.jdk.version}</source>
+                    <target>${project.jdk.version}</target>
                 </configuration>
             </plugin>
             <plugin>

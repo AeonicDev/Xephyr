@@ -84,14 +84,19 @@ public abstract class Module implements ClassDependent<Module>, YAMLSettable, En
     @Override
     public void loadSettings(File f) {
         this.config = YamlConfiguration.loadConfiguration(f);
+        onSettingsLoad();
     }
 
     @Override
     public void saveSettings(File f) {
         try {
+            preSettingsSave();
             this.config.save(f);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+    protected void onSettingsLoad() {}
+    protected void preSettingsSave() { }
 }

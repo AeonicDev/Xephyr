@@ -56,7 +56,7 @@ public class ModuleManager implements ClassBasedManager<Module>, Enableable {
 
     @Override
     public Module[] getContents() {
-        return new Module[0];
+        return modules.values().toArray(new Module[modules.size()]);
     }
 
     @Override
@@ -100,7 +100,7 @@ public class ModuleManager implements ClassBasedManager<Module>, Enableable {
     @Override
     public void onEnable() {
         for (Module m : this.getContents()) {
-            List<Module> dependencies = new ArrayList<Module>();
+            List<Module> dependencies = new ArrayList<>();
             for (Class c : m.getDependencyIdentifiers()) {
                 Class<? extends Module> klass = c.asSubclass(Module.class);
                 try {
