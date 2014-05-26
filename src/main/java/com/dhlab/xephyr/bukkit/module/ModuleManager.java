@@ -101,6 +101,7 @@ public class ModuleManager implements ClassBasedManager<Module>, Enableable {
     public void onEnable() {
         for (Module m : this.getContents()) {
             List<Module> dependencies = new ArrayList<>();
+
             for (Class c : m.getDependencyIdentifiers()) {
                 Class<? extends Module> klass = c.asSubclass(Module.class);
                 try {
@@ -109,14 +110,18 @@ public class ModuleManager implements ClassBasedManager<Module>, Enableable {
                     e.printStackTrace();
                 }
             }
+
             try {
                 m.satisfy(dependencies.toArray(new Module[dependencies.size()]));
             } catch (DependencyNotSatisfiedException e) {
                 e.printStackTrace();
                 continue;
             }
-            if (m instanceof Listener)
+
+            if (m instanceof Listener) {
                 Bukkit.getPluginManager().registerEvents((Listener)m, bootstrap.getPlugin());
+            }
+
             m.loadSettings(m.getFile());
             m.onEnable();
         }
