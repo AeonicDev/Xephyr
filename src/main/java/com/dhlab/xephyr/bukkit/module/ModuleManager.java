@@ -118,11 +118,14 @@ public class ModuleManager implements ClassBasedManager<Module>, Enableable {
             if (m instanceof Listener)
                 Bukkit.getPluginManager().registerEvents((Listener)m, bootstrap.getPlugin());
             m.loadSettings(m.getFile());
+            m.onEnable();
         }
     }
 
     @Override
     public void onDisable() {
-
+        for (Module m : this.getContents()) {
+            m.onDisable();
+        }
     }
 }
