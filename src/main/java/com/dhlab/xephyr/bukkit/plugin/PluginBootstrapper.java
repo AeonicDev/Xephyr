@@ -29,31 +29,31 @@ public abstract class PluginBootstrapper implements Enableable {
     }
 
     /**
-     * Returns the instance of the plugin this bootstrapper is for.
-     * @return
+     * Gets the instance of the plugin this bootstrapper is for.
+     * @return The instance of the plugin
      */
     public JavaPlugin getPlugin() {
         return plugin;
     }
 
     /**
-     * Returns the Command Framework that this bootstrapper uses.
-     * @return
+     * Gets the CommandFramework that this bootstrapper uses.
+     * @return The {@link CommandFramework} instance
      */
     public CommandFramework getCommandFramework() {
         return commandFramework;
     }
 
     /**
-     * Returns the module manager that this bootstrapper uses.
-     * @return
+     * Gets the {@link ModuleManager} that this bootstrapper uses.
+     * @return The ModuleManager instance
      */
     public ModuleManager getModuleManager() {
         return moduleManager;
     }
 
     /**
-     * Returns the item manager that this bootstrapper uses.
+     * Gets the {@link ItemManager} that this bootstrapper uses.
      * @return
      */
     public ItemManager getItemManager() {

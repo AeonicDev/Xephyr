@@ -3,6 +3,7 @@ package com.dhlab.xephyr.bukkit.menu;
 import com.dhlab.xephyr.bukkit.menu.slot.Slot;
 import com.dhlab.xephyr.generic.FormattingNamed;
 import com.dhlab.xephyr.generic.Sizeable;
+import org.apache.commons.lang.Validate;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -28,8 +29,7 @@ public class InventoryMenu implements FormattingNamed, Sizeable {
     protected final List<InventoryDisplayHook> hookList = new ArrayList<InventoryDisplayHook>();
 
     public InventoryMenu(String name) {
-        if (name == null)
-            throw new NullPointerException();
+        Validate.notNull(name);
         this.name = name;
     }
 
