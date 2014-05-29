@@ -12,16 +12,37 @@ import java.sql.SQLException;
 
 /**
  * This class takes a PreparedStatement as an argument and essentially allows
- * you to do asynchronous dingles
+ * for asynchronous queries.
+ *
  * @author maladr0it
  */
 public class PreparedStatementCallbackPair {
 
+    /**
+     * The PreparedStatement to be wrapped around.
+     */
     protected final PreparedStatement statement;
+
+    /**
+     * The result channel.
+     */
     protected final Channel<ResultSet> queryChannel;
+
+    /**
+     * The execution channel.
+     */
     protected final Channel<Boolean> executeChannel;
+
+    /**
+     * The exception channel.
+     */
     protected final Channel<Throwable> exceptionChannel;
 
+    /**
+     * Creates a new {@code PreparedStatementCallbackPair}, wrapping around the given {@link java.sql.PreparedStatement}.
+     *
+     * @param statement The given SQL statement
+     */
     public PreparedStatementCallbackPair(PreparedStatement statement) {
         Validate.notNull(statement);
         this.statement = statement;
@@ -30,22 +51,45 @@ public class PreparedStatementCallbackPair {
         this.exceptionChannel = new MemoryChannel<>();
     }
 
+    /**
+     * Get the wrapped {@link java.sql.PreparedStatement}.
+     *
+     * @return The wrapped SQL statement
+     */
     public PreparedStatement getStatement() {
         return statement;
     }
 
+    /**
+     * Get the {@link ResultSet} channel.
+     *
+     * @return The query result channel
+     */
     public Channel<ResultSet> getQueryChannel() {
         return queryChannel;
     }
 
+    /**
+     * Get the execution channel.
+     *
+     * @return The result of actual execution; false if an error was encountered
+     */
     public Channel<Boolean> getExecuteChannel() {
         return executeChannel;
     }
 
+    /**
+     * Get the exception channel.
+     *
+     * @return The channel where all thrown objects were sent
+     */
     public Channel<Throwable> getExceptionChannel() {
         return exceptionChannel;
     }
 
+    /**
+     * Execute the SQL statement.
+     */
     public void execute() {
         Fiber fbr = new ThreadFiber();
         Runnable h = new Runnable() {
@@ -61,6 +105,9 @@ public class PreparedStatementCallbackPair {
         fbr.execute(h);
     }
 
+    /**
+     * Execute the SQL statement and pipe the returned ResultSet to its given channel.
+     */
     public void executeQuery() {
         Fiber fbr = new ThreadFiber();
         Runnable h = new Runnable() {
