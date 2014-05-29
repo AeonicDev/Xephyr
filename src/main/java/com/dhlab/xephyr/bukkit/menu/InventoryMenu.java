@@ -7,6 +7,9 @@ import org.apache.commons.lang.Validate;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 
 import java.util.ArrayList;
@@ -16,9 +19,11 @@ import java.util.Map;
 
 /**
  * Basic inventory menu API class.
+ *
  * @author maladr0it
  */
-public class InventoryMenu implements FormattingNamed, Sizeable {
+public class InventoryMenu implements FormattingNamed, Sizeable, Listener {
+
     /** The maximum possible inventory size before the client sees glitches */
     public static final int MAX_INVENTORY_SIZE = 54;
 
@@ -120,6 +125,18 @@ public class InventoryMenu implements FormattingNamed, Sizeable {
         for (int i = 0; i < size; i++) {
             slotMapping.put(i, new Slot(i));
         }
+    }
+
+    /**
+     * The {@link org.bukkit.event.EventHandler} for inventory changes to be passed to the menu.
+     *
+     * @param event The inventory event to be passed to the menu
+     */
+    @EventHandler
+    public void onInventoryEvent(InventoryClickEvent event) {
+        if (!event.getInventory().getName().equals(this.getName())) return;
+        this.click((Player)event.getWhoClicked(), event.getSlot());
+        event.setCancelled(true);
     }
 
     public static void closeMenu(final Player player) {
