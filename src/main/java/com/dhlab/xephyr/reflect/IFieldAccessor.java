@@ -28,5 +28,11 @@ public interface IFieldAccessor<T> {
      */
     boolean set(Object instance, T value);
 
+    /**
+     * Transfersfrom
+     * @param from
+     * @param to
+     * @return
+     */
     T transfer(Object from, Object to);
 }

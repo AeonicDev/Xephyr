@@ -3,6 +3,8 @@ package com.dhlab.xephyr.plugin;
 import com.dhlab.xephyr.bukkit.plugin.PluginBootstrapper;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.sql.PreparedStatement;
+
 /**
  * Main Xephyr bootstrapping class.
  * @author maladr0it
@@ -18,7 +20,8 @@ public class Xephyr extends PluginBootstrapper {
 
     @Override
     public void onEnable() {
-
+        PreparedStatement st;
+        st.exe
     }
 
     @Override
