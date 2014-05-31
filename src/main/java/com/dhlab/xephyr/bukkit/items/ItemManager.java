@@ -2,42 +2,129 @@ package com.dhlab.xephyr.bukkit.items;
 
 import com.dhlab.xephyr.bukkit.plugin.PluginBootstrapper;
 import com.dhlab.xephyr.generic.Enableable;
+import com.dhlab.xephyr.generic.management.ManagedNotFoundException;
+import com.dhlab.xephyr.generic.management.Manager;
+import org.apache.commons.lang.Validate;
 import org.bukkit.Bukkit;
 import org.bukkit.event.HandlerList;
+import org.bukkit.event.Listener;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
- * The item manager class that handles registration of all SpecialItems
+ * The item manager class that handles registration of all {@link com.dhlab.xephyr.bukkit.items.SpecialItem} objects.
+ *
  * @author maladr0it
  */
-public class ItemManager implements Enableable {
+public class ItemManager implements Manager<SpecialItem, Class>, Enableable {
 
-    protected final Map<Class<? extends SpecialItem>, SpecialItem>
-            items = new HashMap<Class<? extends SpecialItem>, SpecialItem>();
+    /**
+     * The managed special items.
+     */
+    protected final Map<Class<? extends SpecialItem>, SpecialItem> items = new HashMap<Class<? extends SpecialItem>, SpecialItem>();
+
+    /**
+     * The bootstrapper this manager is for.
+     */
     protected final PluginBootstrapper bootstrap;
 
+    /**
+     * Creates a new instance of this manager for the specified {@link com.dhlab.xephyr.bukkit.plugin.PluginBootstrapper}.
+     *
+     * @param bootstrap The plugin bootstrapper.
+     */
     public ItemManager(PluginBootstrapper bootstrap) {
+        Validate.notNull(bootstrap);
         this.bootstrap = bootstrap;
-    }
-
-    public <T extends SpecialItem> void add(T item) {
-        items.put(item.getClass(), item);
     }
 
     @Override
     public void onEnable() {
         for (SpecialItem item : items.values()) {
-            Bukkit.getPluginManager().registerEvents(item, bootstrap.getPlugin());
+            if (item instanceof Listener) {
+                Bukkit.getPluginManager().registerEvents(item, bootstrap.getPlugin());
+            }
         }
     }
 
     @Override
     public void onDisable() {
         for (SpecialItem item : items.values()) {
-            // we really don't actually need to do this.
-            HandlerList.unregisterAll(item);
+            if (item instanceof Listener) {
+                HandlerList.unregisterAll(item);
+            }
         }
+    }
+
+    @Override
+    public Class<SpecialItem> getManagedType() {
+        return SpecialItem.class;
+    }
+
+    @Override
+    public void add(SpecialItem obj) {
+        Validate.notNull(obj);
+        this.items.put(obj.getClass(), obj);
+    }
+
+    @Override
+    public void remove(SpecialItem obj) {
+        this.removeByID(obj.getClass());
+    }
+
+    @Override
+    public void removeByID(Class obj) {
+        this.items.remove(obj);
+    }
+
+    @Override
+    public boolean has(Class obj) {
+        return this.items.containsKey(obj);
+    }
+
+    @Override
+    public SpecialItem[] getContents() {
+        return this.items.values().toArray(new SpecialItem[this.items.size()]);
+    }
+
+    @Override
+    public SpecialItem find(Class identifier) throws ManagedNotFoundException {
+        SpecialItem found = this.items.get(identifier);
+        if (found == null) throw new ManagedNotFoundException();
+        return found;
+    }
+
+    @Override
+    public SpecialItem[] findAllByOne(Class identifier) throws ManagedNotFoundException {
+        List<SpecialItem> found = new ArrayList<SpecialItem>();
+
+        for (SpecialItem item : this.items.values()) {
+            if (item.getClass().equals(identifier)) {
+                found.add(item);
+            }
+        }
+
+        if (found.size() == 0) throw new ManagedNotFoundException(identifier);
+
+        return found.toArray(new SpecialItem[found.size()]);
+    }
+
+    @Override
+    public SpecialItem[] findAllByMany(Class... identifiers) throws ManagedNotFoundException {
+        Validate.notNull(identifiers);
+
+        List<SpecialItem> found = new ArrayList<SpecialItem>();
+
+        for (Class<? extends SpecialItem> id : identifiers) {
+            try {
+                found.addAll(Arrays.asList(this.findAllByOne(id)));
+            } catch(ManagedNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if (found.size() == 0) throw new ManagedNotFoundException(identifiers);
+
+        return found.toArray(new SpecialItem[found.size()]);
     }
 }

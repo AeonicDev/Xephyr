@@ -43,6 +43,7 @@ public class MenuManager implements Manager<InventoryMenu, Class> {
 
     @Override
     public void add(InventoryMenu obj) {
+        Validate.notNull(obj);
         this.menus.put(obj.getClass(), obj);
     }
 
@@ -68,7 +69,6 @@ public class MenuManager implements Manager<InventoryMenu, Class> {
 
     @Override
     public InventoryMenu find(Class identifier) throws ManagedNotFoundException {
-        Validate.notNull(identifier);
         InventoryMenu found = this.menus.get(identifier);
         if (found == null) throw new ManagedNotFoundException(identifier);
         return found;
@@ -76,26 +76,23 @@ public class MenuManager implements Manager<InventoryMenu, Class> {
 
     @Override
     public InventoryMenu[] findAllByOne(Class identifier) throws ManagedNotFoundException {
-        Validate.notNull(identifier);
-
         List<InventoryMenu> found = new ArrayList<>();
         for (InventoryMenu menu : this.menus.values()) {
             if (menu.getClass().isInstance(identifier))
                 found.add(menu);
         }
 
-        if (found.size() == 0)
-            throw new ManagedNotFoundException(identifier);
+        if (found.size() == 0) throw new ManagedNotFoundException(identifier);
 
         return found.toArray(new InventoryMenu[found.size()]);
     }
 
     @Override
-    public InventoryMenu[] findAllByMany(Class... identifier) throws ManagedNotFoundException {
-        Validate.notNull(identifier);
+    public InventoryMenu[] findAllByMany(Class... identifiers) throws ManagedNotFoundException {
+        Validate.notNull(identifiers);
         List<InventoryMenu> menus = new ArrayList<InventoryMenu>();
 
-        for (Class<? extends Module> id : identifier) {
+        for (Class<? extends Module> id : identifiers) {
             try {
                 menus.addAll(Arrays.asList(findAllByOne(id)));
             } catch (ManagedNotFoundException e) {
@@ -103,7 +100,7 @@ public class MenuManager implements Manager<InventoryMenu, Class> {
             }
         }
 
-        if (menus.size() == 0) throw new ManagedNotFoundException(identifier);
+        if (menus.size() == 0) throw new ManagedNotFoundException(identifiers);
         return menus.toArray(new InventoryMenu[menus.size()]);
     }
 

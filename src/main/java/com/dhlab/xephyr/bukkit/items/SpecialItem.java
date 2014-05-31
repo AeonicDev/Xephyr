@@ -16,14 +16,32 @@ import java.util.List;
  * Note: The name MUST have colors in it, or it will be possible for people to use anvils to acquire
  * the items. Sadly, damage values no longer work because the Bukkit team removed the ability to
  * put damage values on non-damageable items.
+ *
  * @author maladr0it
  */
 public class SpecialItem implements Listener,FormattingNameable {
 
+    /**
+     * The name of the special item.
+     */
     protected final String name;
+
+    /**
+     * The material of the special item.
+     */
     protected final Material material;
+
+    /**
+     * The lore value(s) of the special item.
+     */
     protected final List<String> lore = new ArrayList<String>();
 
+    /**
+     * Creates a new {@code SpecialItem} with the specified name and {@link org.bukkit.Material}.
+     *
+     * @param name The name of the special item.
+     * @param m The material of the special item.
+     */
     public SpecialItem(String name, Material m) {
         if (name == null)
             throw new NullPointerException("Name cannot be null!");
@@ -33,6 +51,11 @@ public class SpecialItem implements Listener,FormattingNameable {
         this.material = m;
     }
 
+    /**
+     * Gets the name of this {@code SpecialItem}.
+     *
+     * @return The name of the special item.
+     */
     public final String getName() {
         return name;
     }
@@ -47,25 +70,46 @@ public class SpecialItem implements Listener,FormattingNameable {
         return ChatColor.stripColor(getName());
     }
 
+    /**
+     * Adds a line to this {@code SpecialItem} object's lore.
+     *
+     * @param line The line to add.
+     */
     public void addLore(String line) {
         lore.add(line);
     }
 
+    /**
+     * Removes a line to from this {@code SpecialItem} object's lore.
+     *
+     * @param line The line index to remove.
+     */
     public void removeLore(int line) {
         lore.remove(line);
     }
 
+    /**
+     * Gets this {@code SpecialItem} object's lore.
+     *
+     * @return
+     */
     public String[] getLore() {
         return lore.toArray(new String[lore.size()]);
     }
 
+    /**
+     * Gets this {@code SpecialItem} object's material.
+     *
+     * @return
+     */
     public Material getMaterial() {
         return material;
     }
 
     /**
-     * A generic method to spawn a working version of this item into the world.
-     * @return
+     * Spawns a working version of this item into the world.
+     *
+     * @return The item stack of the special item.
      */
     public ItemStack spawnItem() {
         ItemStack stack = new ItemStack(material);
@@ -77,9 +121,10 @@ public class SpecialItem implements Listener,FormattingNameable {
     }
 
     /**
-     * A generic method to spawn a working version of this item into the world,
-     * @param amount
-     * @return
+     * Spawns a working version of this item into the world with the specified stack amount.
+     *
+     * @param amount The stack size.
+     * @return The item stack of the special item.
      */
     public ItemStack spawnItem(int amount) {
         ItemStack h = this.spawnItem();
@@ -87,6 +132,12 @@ public class SpecialItem implements Listener,FormattingNameable {
         return h;
     }
 
+    /**
+     * Gets if the specified {@link org.bukkit.inventory.ItemStack} is the same as this {@code SpecialItem}.
+     *
+     * @param stack The item stack to check.
+     * @return If the item stack is the same as this special item.
+     */
     public boolean isItem(ItemStack stack) {
         if (stack == null)
             return false;
