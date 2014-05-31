@@ -5,6 +5,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 /**
  * Main Xephyr bootstrapping class.
+ *
  * @author maladr0it
  */
 public class Xephyr extends PluginBootstrapper {
@@ -18,7 +19,7 @@ public class Xephyr extends PluginBootstrapper {
 
     @Override
     public void onEnable() {
-        
+
     }
 
     @Override
@@ -29,4 +30,5 @@ public class Xephyr extends PluginBootstrapper {
     public static Xephyr getInstance() {
         return instance;
     }
+
 }

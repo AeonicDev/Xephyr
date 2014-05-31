@@ -13,6 +13,8 @@ import java.sql.SQLException;
 
 /**
  * The SQL runnable that the AsyncSQL instance uses.
+ * Wrapped in a {@link org.bukkit.scheduler.BukkitRunnable} for consistency.
+ *
  * @author maladr0it
  */
 public class AsyncSQLRunnable extends BukkitRunnable {
@@ -35,6 +37,14 @@ public class AsyncSQLRunnable extends BukkitRunnable {
      */
     private final SQLExecutionType execType;
 
+    /**
+     * Creates a new instance of a runnable SQL statement.
+     *
+     * @param plugin The plugin this statement is being executed for
+     * @param st The statement
+     * @param callback The callback to execute afterward (receives the results)
+     * @param type The execution type of the statement
+     */
     public AsyncSQLRunnable(JavaPlugin plugin, PreparedStatement st, SQLResultReceiver callback, SQLExecutionType type) {
         Validate.notNull(plugin);
         Validate.isTrue(plugin.isEnabled()); // make sure the plugin is, in fact, enabled.
@@ -46,6 +56,9 @@ public class AsyncSQLRunnable extends BukkitRunnable {
         this.execType = type;
     }
 
+    /**
+     * Wraps execution in the {@link Runnable#run()} method.
+     */
     @Override
     public void run() {
         try {
@@ -58,6 +71,14 @@ public class AsyncSQLRunnable extends BukkitRunnable {
         }
     }
 
+    /**
+     * Actually executes the {@link java.sql.PreparedStatement}.
+     *
+     * @param st
+     * @param type
+     * @return
+     * @throws SQLException
+     */
     private Object execute(PreparedStatement st, SQLExecutionType type) throws SQLException {
         switch (type) {
             case NORMAL_EXEC:
@@ -70,6 +91,13 @@ public class AsyncSQLRunnable extends BukkitRunnable {
         return null;
     }
 
+    /**
+     * Executes the callback provided by the statement.
+     *
+     * @param callback The callback
+     * @param type The type of statement
+     * @param obj The result of the statement
+     */
     private void callback(final SQLResultReceiver callback, final SQLExecutionType type, final Object obj) {
         Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
             @Override
