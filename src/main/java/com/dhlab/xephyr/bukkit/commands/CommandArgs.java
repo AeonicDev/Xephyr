@@ -5,14 +5,33 @@ import org.bukkit.entity.Player;
 
 /**
  * The arguments that are passed to every onCommand method.
+ *
  * @author maladr0it
  */
 public class CommandArgs {
 
+    /**
+     * The sender of the command these arguments are for.
+     */
     protected final CommandSender sender;
+
+    /**
+     * The label of the command these arguments are for.
+     */
     protected final String label;
+
+    /**
+     * The internal argument pool.
+     */
     protected final ArgumentPool arguments;
 
+    /**
+     * Creates a new {@code CommandArgs} instance with the specified internal data.
+     *
+     * @param sender The sender of the command these arguments are for.
+     * @param label The label of the command these arguments are for.
+     * @param args The arguments from the command that will be internalized.
+     */
     public CommandArgs(CommandSender sender, String label, String[] args) {
         if (sender == null)
             throw new NullPointerException("sender");
@@ -26,24 +45,27 @@ public class CommandArgs {
     }
 
     /**
-     * Returns whether the sender is an instance of a player.
-     * @return
+     * Gets whether the sender is an instance of a player.
+     *
+     * @return If the command sender is a player.
      */
     public boolean isPlayer() {
         return (sender instanceof Player);
     }
 
     /**
-     * Returns the CommandSender instance that this object was initialized with.
-     * @return
+     * Gets the CommandSender instance that this object was initialized with.
+     *
+     * @return The command sender.
      */
     public CommandSender getSender() {
         return sender;
     }
 
     /**
-     * Returns the sender cast to a player, but throws a RuntimeException when the sender isn't a player.
-     * @return
+     * Gets the sender casted to a player, but throws a RuntimeException when the sender isn't a player.
+     *
+     * @return The player-casted command sender.
      */
     public Player getPlayer() {
         if (!isPlayer())
@@ -52,24 +74,27 @@ public class CommandArgs {
     }
 
     /**
-     * Returns the label (base command) of these arguments.
-     * @return
+     * Gets the label (base command) of these arguments.
+     *
+     * @return The command label.
      */
     public String getLabel() {
         return label;
     }
 
     /**
-     * Returns the ArgumentPool used by this CommandArgs instance.
-     * @return
+     * Gets the ArgumentPool used by this CommandArgs instance.
+     *
+     * @return The argument pool.
      */
     public ArgumentPool getArgs() {
         return arguments;
     }
 
     /**
-     * Sends a message to the sender.
-     * @param message
+     * Sends a message to the command sender.
+     *
+     * @param message The message to be sent.
      */
     public void sendMessage(String message) {
         sendMessage("", message);
@@ -77,10 +102,12 @@ public class CommandArgs {
 
     /**
      * Sends a message to the sender with the specified prefix.
-     * @param prefix
-     * @param message
+     *
+     * @param prefix The prefix of the message.
+     * @param message The message to be sent.
      */
     public void sendMessage(String prefix, String message) {
         getSender().sendMessage(prefix + message);
     }
+
 }

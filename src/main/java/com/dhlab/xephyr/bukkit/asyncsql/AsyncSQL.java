@@ -88,4 +88,5 @@ public class AsyncSQL implements SQLStatementWrapper {
         // the callback can be null, we don't absolutely HAVE to return anything.
         Bukkit.getScheduler().runTaskAsynchronously(plugin, new AsyncSQLRunnable(plugin, st, callback, type));
     }
+
 }

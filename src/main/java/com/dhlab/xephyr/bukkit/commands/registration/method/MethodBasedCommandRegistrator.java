@@ -11,15 +11,28 @@ import java.lang.reflect.Method;
 
 /**
  * Registers methods on an object with the @Command annotation.
+ *
  * @author maladr0it
  */
 public class MethodBasedCommandRegistrator implements CommandRegistrator<MethodRegistrationContext> {
 
+    /**
+     * Get the type of registration context.
+     *
+     * @return The class of the context type.
+     */
     @Override
     public Class<MethodRegistrationContext> getContextType() {
         return MethodRegistrationContext.class;
     }
 
+    /**
+     * Register commands from the context.
+     *
+     * @param framework The command framework instance.
+     * @param context The context in which to register the commands.
+     * @throws CommandRegistrationException
+     */
     @Override
     public void registerCommands(CommandFramework framework, MethodRegistrationContext context) throws CommandRegistrationException {
         Object toRegister = context.getRegistered();
@@ -43,4 +56,5 @@ public class MethodBasedCommandRegistrator implements CommandRegistrator<MethodR
             }
         }
     }
+
 }

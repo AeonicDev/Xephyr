@@ -24,25 +24,46 @@ import java.util.regex.Pattern;
 /**
  * The basic CommandFrammework that can be used in your plugins.
  * Automatically registers your commands for this plugin with the
- * SimplePluginManager command framework.
+ * SimplePluginManager command framework within Bukkit.
+ *
  * @author maladr0it
  */
 public class CommandFramework {
 
+    /**
+     * The map of command executors.
+     */
     protected final Map<String, XCommandExecutor> executorMap = new HashMap<String, XCommandExecutor>();
+
+    /**
+     * The map of command registrators.
+     */
     protected final Map<Class, CommandRegistrator> commandRegistrators = new HashMap<Class, CommandRegistrator>();
+
+    /**
+     * The command mapping.
+     */
     protected CommandMap commandMapping;
+
+    /**
+     * The plugin this framework is being used with.
+     */
     protected final Plugin plugin;
 
     /**
+     * The pattern for double quote arguments.
      * This matches things like:
      * /command "multiple spaces and such" nospaces
      * with args[0] being "multiple spaces and such" without quotes
      * and args[1] being nospaces.
-     * Very useful.
      */
     protected static final Pattern doubleQuoteMatcher = Pattern.compile("(\\\"[^\\\"]+\\\"|[^\\s\\\"]+)");
 
+    /**
+     * Creates a new {@code CommandFramework} instance for the specified plugin.
+     *
+     * @param plugin The plugin using this command framework instance.
+     */
     public CommandFramework(Plugin plugin) {
         this.plugin = plugin;
         if (!(Bukkit.getPluginManager() instanceof SimplePluginManager))
@@ -68,12 +89,13 @@ public class CommandFramework {
     }
 
     /**
-     * Handles
-     * @param sender
-     * @param label
-     * @param cmd
-     * @param args
-     * @return
+     * Bridges Bukkit's commands through to the framework and handles them.
+     *
+     * @param sender The command sender.
+     * @param label The command label.
+     * @param cmd The command.
+     * @param args The command arguments.
+     * @return The result of the command execution.
      */
     public boolean handleCommand(CommandSender sender, org.bukkit.command.Command cmd, String label, String[] args) {
         String joined = Joiner.on(" ").skipNulls().join(args);
@@ -132,6 +154,11 @@ public class CommandFramework {
         return false;
     }
 
+    /**
+     * Add an executor to the executor map.
+     *
+     * @param executor The executor to be added.
+     */
     public void addExecutor(XCommandExecutor executor) {
         this.executorMap.put(executor.label(), executor);
         String realLabel = executor.label().split("\\.")[0];
@@ -139,6 +166,11 @@ public class CommandFramework {
         // TODO - Add description and Usage changes.
     }
 
+    /**
+     * Registers commands from the specified registration context.
+     *
+     * @param context The registration context.
+     */
     public void registerCommand(CommandRegistrationContext context) {
         if (commandRegistrators.get(context.getClass()) == null)
             throw new NotImplementedException();
@@ -150,11 +182,22 @@ public class CommandFramework {
         }
     }
 
+    /**
+     * Adds a registrator to the registrator map by context type.
+     *
+     * @param registrator The registrator to be added.
+     */
     public void addRegistrator(CommandRegistrator registrator) {
         commandRegistrators.put(registrator.getContextType(), registrator);
     }
 
+    /**
+     * Removes a registrator from the registrator map by context type.
+     *
+     * @param klass The class of the registrator to be removed.
+     */
     public void removeRegistrator(Class klass) {
         commandRegistrators.remove(klass);
     }
+
 }

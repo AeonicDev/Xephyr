@@ -6,24 +6,49 @@ import com.dhlab.xephyr.bukkit.commands.XCommandExecutor;
 import com.dhlab.xephyr.bukkit.commands.registration.wrapper.CommandWrapper;
 
 /**
- * Executes commands embedded in CommandWrappers.
+ * Executes commands embedded in {@link com.dhlab.xephyr.bukkit.commands.registration.wrapper.CommandWrapper} objects.
+ *
  * @author maladr0it
+ * @see com.dhlab.xephyr.bukkit.commands.registration.wrapper.CommandWrapper
  */
 public class WrapperBasedCommandExecutor implements XCommandExecutor {
 
+    /**
+     * The label for this command.
+     */
     protected final String label;
+
+    /**
+     * The command wrapper.
+     */
     protected final CommandWrapper wrapper;
 
+    /**
+     * Creates a new {@code WrapperBasedCommandExecutor} with the specified label and wrapper.
+     *
+     * @param label The command label.
+     * @param wrapper The command wrapper.
+     */
     public WrapperBasedCommandExecutor(String label, CommandWrapper wrapper) {
         this.label = label;
         this.wrapper = wrapper;
     }
 
+    /**
+     * Gets the command label.
+     *
+     * @return The command label.
+     */
     @Override
     public String label() {
         return label;
     }
 
+    /**
+     * Handles the command specified by the wrapper.
+     *
+     * @param args The arguments associated with the command.
+     */
     @Override
     public void handleCommand(CommandArgs args) {
         try {
@@ -41,4 +66,5 @@ public class WrapperBasedCommandExecutor implements XCommandExecutor {
             args.getPlayer().sendMessage(e.getMessage());
         }
     }
+
 }
