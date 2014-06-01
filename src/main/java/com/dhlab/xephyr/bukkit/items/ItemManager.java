@@ -2,8 +2,8 @@ package com.dhlab.xephyr.bukkit.items;
 
 import com.dhlab.xephyr.bukkit.plugin.PluginBootstrapper;
 import com.dhlab.xephyr.generic.Enableable;
+import com.dhlab.xephyr.generic.management.ClassBasedManager;
 import com.dhlab.xephyr.generic.management.ManagedNotFoundException;
-import com.dhlab.xephyr.generic.management.Manager;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Bukkit;
 import org.bukkit.event.HandlerList;
@@ -16,7 +16,7 @@ import java.util.*;
  *
  * @author maladr0it
  */
-public class ItemManager implements Manager<SpecialItem, Class>, Enableable {
+public class ItemManager implements ClassBasedManager<SpecialItem>, Enableable {
 
     /**
      * The managed special items.

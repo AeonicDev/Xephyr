@@ -45,7 +45,7 @@ public abstract class PluginBootstrapper implements Enableable {
     /**
      * Creates a new PluginBootstrapper instance with the specified Bukkit {@link org.bukkit.plugin.java.JavaPlugin} instance.
      *
-     * @param plugin The Bukkit JavaPlugin to bootstrap
+     * @param plugin The Bukkit JavaPlugin to bootstrap.
      */
     public PluginBootstrapper(JavaPlugin plugin) {
         if (plugin == null) throw new NullPointerException("Plugin cannot be null.");
@@ -59,34 +59,34 @@ public abstract class PluginBootstrapper implements Enableable {
     /**
      * Gets the instance of the plugin this bootstrapper is for.
      *
-     * @return The instance of the plugin
+     * @return The instance of the plugin.
      */
     public JavaPlugin getPlugin() {
         return plugin;
     }
 
     /**
-     * Gets the {@link CommandFramework} that this bootstrapper uses.
+     * Gets the {@link com.dhlab.xephyr.bukkit.commands.CommandFramework} that this bootstrapper uses.
      *
-     * @return The CommandFramework instance
+     * @return The CommandFramework instance.
      */
     public CommandFramework getCommandFramework() {
         return commandFramework;
     }
 
     /**
-     * Gets the {@link ModuleManager} that this bootstrapper uses.
+     * Gets the {@link com.dhlab.xephyr.bukkit.module.ModuleManager} that this bootstrapper uses.
      *
-     * @return The ModuleManager instance
+     * @return The ModuleManager instance.
      */
     public ModuleManager getModuleManager() {
         return moduleManager;
     }
 
     /**
-     * Gets the {@link ItemManager} that this bootstrapper uses.
+     * Gets the {@link com.dhlab.xephyr.bukkit.items.ItemManager} that this bootstrapper uses.
      *
-     * @return The ItemManager instance
+     * @return The ItemManager instance.
      */
     public ItemManager getItemManager() {
         return itemManager;
@@ -96,9 +96,10 @@ public abstract class PluginBootstrapper implements Enableable {
     /**
      * Gets the plugin logger.
      *
-     * @return The plugin Logger instance from Bukkit
+     * @return The plugin Logger instance from Bukkit.
      */
     public Logger getLogger() {
         return getPlugin().getLogger();
     }
+
 }

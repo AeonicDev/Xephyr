@@ -13,18 +13,37 @@ import java.util.*;
 
 /**
  * Module manager implementation.
+ *
  * @author maladr0it
  */
 public class ModuleManager implements ClassBasedManager<Module>, Enableable {
+
+    /**
+     * The internal storage mechanism for this manager.
+     * Stores modules indexed by their class.
+     */
     protected final Map<Class<? extends Module>, Module> modules = new HashMap<>();
 
+    /**
+     * The plugin bootstrapper for this manager.
+     */
     protected final PluginBootstrapper bootstrap;
 
+    /**
+     * Creates a new {@code ModuleManager} instance for the specified {@link com.dhlab.xephyr.bukkit.plugin.PluginBootstrapper}.
+     *
+     * @param bootstrap The plugin bootstrapper.
+     */
     public ModuleManager(PluginBootstrapper bootstrap) {
         Validate.notNull(bootstrap);
         this.bootstrap = bootstrap;
     }
 
+    /**
+     * Gets the {@link com.dhlab.xephyr.bukkit.plugin.PluginBootstrapper} for this manager.
+     *
+     * @return The plugin bootstrapper.
+     */
     public PluginBootstrapper getBootstrapper() {
         return bootstrap;
     }
@@ -133,4 +152,5 @@ public class ModuleManager implements ClassBasedManager<Module>, Enableable {
             m.onDisable();
         }
     }
+
 }

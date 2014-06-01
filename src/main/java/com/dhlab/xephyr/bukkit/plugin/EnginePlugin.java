@@ -10,12 +10,11 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public abstract class EnginePlugin extends JavaPlugin {
 
+    /**
+     * The plugin bootstrapper for this {@link org.bukkit.plugin.Plugin}.
+     */
     protected PluginBootstrapper bootstrap;
 
-    /**
-     * Called when the plugin is enabled.
-     * Should not be directly called.
-     */
     @Override
     public void onEnable() {
         try {
@@ -29,32 +28,20 @@ public abstract class EnginePlugin extends JavaPlugin {
 
     }
 
-    /**
-     * Called when the plugin is disabled.
-     * Should not be directly called.
-     */
     @Override
     public void onDisable() {
         if (bootstrap != null)
             bootstrap.onDisable();
     }
 
-    /**
-     * Bridge method that hands commands to Xephyr's framework.
-     *
-     * @param snd The CommandSender
-     * @param cmd The Command
-     * @param lbl The command label
-     * @param args Array of arguments
-     * @return The result of the command; true for success, false if an error was encountered.
-     */
     @Override
     public boolean onCommand(CommandSender snd, Command cmd, String lbl, String[] args) {
         return bootstrap != null && isEnabled() ? bootstrap.getCommandFramework().handleCommand(snd, cmd, lbl, args) : false;
     }
 
     /**
-     * Method called upon being enabled; plugin MUST override this to create a PluginBootstrapper instance.
+     * Method called upon being enabled; plugin should override this to set the protected {@link com.dhlab.xephyr.bukkit.plugin.PluginBootstrapper} instance.
      */
     public abstract void initialize();
+
 }

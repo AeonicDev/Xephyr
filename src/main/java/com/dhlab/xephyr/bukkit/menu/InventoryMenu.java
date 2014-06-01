@@ -24,19 +24,47 @@ import java.util.Map;
  */
 public class InventoryMenu implements FormattingNamed, Sizeable, Listener {
 
+    /**
+     * The maximum inventory size before the client sees visual glitches.
+     */
     public static final int MAX_INVENTORY_SIZE = 54;
 
+    /**
+     * The name of this menu.
+     */
     protected final String name;
+
+    /**
+     * The size of this menu, defaults to 9.
+     */
     protected int size = 9;
 
+    /**
+     * The map of slots.
+     */
     protected final Map<Integer, Slot> slotMapping = new HashMap<Integer, Slot>();
+
+    /**
+     * The list of hooks that will be called when a player tries to see a slot.
+     */
     protected final List<InventoryDisplayHook> hookList = new ArrayList<InventoryDisplayHook>();
 
+    /**
+     * Creates a new {@code InventoryMenu} with the specified name.
+     *
+     * @param name The name of the menu.
+     */
     public InventoryMenu(String name) {
         Validate.notNull(name);
         this.name = name;
     }
 
+    /**
+     * Creates a new {@code InventoryMenu} with the specified name and size.
+     *
+     * @param name The name of the menu.
+     * @param size The size of the menu.
+     */
     public InventoryMenu(String name, int size) {
         this(name);
         setSize(size);
@@ -69,6 +97,12 @@ public class InventoryMenu implements FormattingNamed, Sizeable, Listener {
         fillSlots();
     }
 
+    /**
+     * Gets a {@link com.dhlab.xephyr.bukkit.menu.slot.Slot} by its map key.
+     *
+     * @param key The map key.
+     * @return The slot that corresponds to the key.
+     */
     public Slot getSlot(int key) {
         return this.slotMapping.get(key);
     }
@@ -85,6 +119,11 @@ public class InventoryMenu implements FormattingNamed, Sizeable, Listener {
         s.click(player);
     }
 
+    /**
+     * Display the menu to the specified {@link org.bukkit.entity.Player}.
+     *
+     * @param player The player to show the menu to.
+     */
     public void displayInventory(Player player) {
         closeMenu(player);
         Inventory inventory = Bukkit.createInventory(null, size, getName());
@@ -107,18 +146,28 @@ public class InventoryMenu implements FormattingNamed, Sizeable, Listener {
         player.openInventory(inventory);
     }
 
+    /**
+     * Adds an {@link com.dhlab.xephyr.bukkit.menu.InventoryDisplayHook} to this {@code InventoryMenu}.
+     *
+     * @param hook The hook to be added.
+     */
     public void addHook(InventoryDisplayHook hook) {
-        if (hook == null)
-            return;
+        Validate.notNull(hook);
         this.hookList.add(hook);
     }
 
+    /**
+     * Removes an {@link com.dhlab.xephyr.bukkit.menu.InventoryDisplayHook} from this {@code InventoryMenu}.
+     *
+     * @param hook The hook to be remove.
+     */
     public void removeHook(InventoryDisplayHook hook) {
-        if (hook == null)
-            return;
         this.hookList.remove(hook);
     }
 
+    /**
+     * Populates the menu with empty {@link com.dhlab.xephyr.bukkit.menu.slot.Slot} objects.
+     */
     protected void fillSlots() {
         slotMapping.clear();
         for (int i = 0; i < size; i++) {
@@ -138,7 +187,13 @@ public class InventoryMenu implements FormattingNamed, Sizeable, Listener {
         event.setCancelled(true);
     }
 
+    /**
+     * Closes the current {@link org.bukkit.inventory.Inventory} the specified {@link org.bukkit.entity.Player} has open.
+     *
+     * @param player The player whose inventory to close.
+     */
     public static void closeMenu(final Player player) {
         player.closeInventory();
     }
+
 }

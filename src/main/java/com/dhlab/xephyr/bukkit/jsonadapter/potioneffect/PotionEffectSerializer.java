@@ -11,11 +11,16 @@ import java.lang.reflect.Type;
 
 /**
  * Serializes PotionEffects into JSON strings.
+ *
  * @author maladr0it
  */
 public final class PotionEffectSerializer implements JsonSerializer<PotionEffect> {
 
+    /**
+     * Private constructor for the singleton instance.
+     */
     private PotionEffectSerializer() { }
+
     @Override
     public JsonElement serialize(PotionEffect potionEffect, Type type, JsonSerializationContext jsonSerializationContext) {
         JsonObject obj = new JsonObject();
@@ -26,7 +31,16 @@ public final class PotionEffectSerializer implements JsonSerializer<PotionEffect
         return obj;
     }
 
+    /**
+     * The singleton serializer instance.
+     */
     private static final PotionEffectSerializer instance = new PotionEffectSerializer();
 
+    /**
+     * Gets the singleton instance of this serializer.
+     *
+     * @return The serializer instance.
+     */
     public static final PotionEffectSerializer get() { return instance; }
+
 }

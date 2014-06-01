@@ -1,6 +1,7 @@
 package com.dhlab.xephyr.bukkit.jsonadapter.potioneffect;
 
 
+import org.apache.commons.lang.Validate;
 import org.bukkit.craftbukkit.libs.com.google.gson.*;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -9,19 +10,23 @@ import java.lang.reflect.Type;
 
 /**
  * Deserializes JSON strings into potion effects.
+ *
  * @author maladr0it
  */
 public final class PotionEffectDeserializer implements JsonDeserializer<PotionEffect> {
 
+    /**
+     * Private constructor for the singleton instance.
+     */
     private PotionEffectDeserializer() { }
 
     @Override
     public PotionEffect deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
-        if (jsonElement == null)
-            return null;
-        if (!jsonElement.isJsonObject())
-            return null;
+        Validate.notNull(jsonElement);
+        Validate.isTrue(jsonElement.isJsonObject());
+
         JsonObject obj = jsonElement.getAsJsonObject();
+
         if (!obj.has(PotionEffectFormat.POTION_EFFECT_ID))
             return null;
         int effectID = obj.get(PotionEffectFormat.POTION_EFFECT_ID).getAsInt();
@@ -40,7 +45,15 @@ public final class PotionEffectDeserializer implements JsonDeserializer<PotionEf
         return new PotionEffect(pet, duration, amplifier, ambient);
     }
 
+    /**
+     * The singleton deserializer instance.
+     */
     private static final PotionEffectDeserializer instance = new PotionEffectDeserializer();
 
+    /**Gets the singleton instance of this deserializer.
+     *
+     * @return The deserializer instance.
+     */
     public static final PotionEffectDeserializer get() { return instance; }
+
 }
