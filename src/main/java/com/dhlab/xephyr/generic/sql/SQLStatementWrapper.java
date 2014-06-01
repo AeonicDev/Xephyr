@@ -11,11 +11,12 @@ import java.sql.SQLException;
  * @author maladr0it
  */
 public interface SQLStatementWrapper {
+
     /**
-     * Utility method that calls {@code Connection.prepare()}
+     * Utility method that calls {@link java.sql.Connection#prepareStatement(String)}.
      *
-     * @param sql The string containing the SQL statement
-     * @return A prepared statement
+     * @param sql The string containing the SQL statement.
+     * @return A prepared statement.
      */
     public PreparedStatement prepare(String sql) throws SQLException;
 
@@ -23,16 +24,17 @@ public interface SQLStatementWrapper {
      * Returns the SQL connection to the database, in case the user wants to directly access
      * it.
      *
-     * @return The SQL database connection
+     * @return The SQL database connection.
      */
     public Connection getConnection();
 
     /**
      * Executes the SQL statement.
      *
-     * @param st The PreparedStatement to use
-     * @param callback The callback to use for results. Can be null, the query will be executed regardless
-     * @param type Whether to do a normal execution, a query execution, or an update execution
+     * @param st The PreparedStatement to use.
+     * @param callback The callback to use for results. Can be null, the query will be executed regardless.
+     * @param type Whether to do a normal execution, a query execution, or an update execution.
      */
     public void execute(PreparedStatement st, SQLResultReceiver callback, SQLExecutionType type);
+
 }

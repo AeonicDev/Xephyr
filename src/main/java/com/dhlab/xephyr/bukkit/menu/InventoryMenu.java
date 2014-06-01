@@ -24,7 +24,6 @@ import java.util.Map;
  */
 public class InventoryMenu implements FormattingNamed, Sizeable, Listener {
 
-    /** The maximum possible inventory size before the client sees glitches */
     public static final int MAX_INVENTORY_SIZE = 54;
 
     protected final String name;

@@ -2,6 +2,7 @@ package com.dhlab.xephyr.bukkit.jsonadapter.itemstack;
 
 import com.dhlab.xephyr.bukkit.jsonadapter.fireworkeffect.FireworkEffectSerializer;
 import com.dhlab.xephyr.bukkit.jsonadapter.potioneffect.PotionEffectSerializer;
+import net.minecraft.util.org.apache.commons.lang3.Validate;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
@@ -17,22 +18,27 @@ import java.util.Map;
 
 /**
  * A serialization class to turn ItemStacks into JSON elements using Gson.
+ *
  * @author maladr0it
  */
 public final class ItemStackSerializer implements JsonSerializer<ItemStack> {
 
+    /**
+     * Gson instance to use for the tree method.
+     */
     private static final Gson gson = new Gson();
 
+    /**
+     * Private constructor for the singleton instance.
+     */
     private ItemStackSerializer() { }
 
     @Override
     public JsonElement serialize(ItemStack stk, Type type, JsonSerializationContext jsonSerializationContext) {
-        if (stk == null)
-            return null;
-        if (stk.getType().equals(Material.AIR))
-            return null;
-        if (stk.getAmount() == 0)
-            return null;
+        Validate.notNull(stk);
+        Validate.isTrue(!stk.getType().equals(Material.AIR));
+        Validate.isTrue(stk.getAmount() == 0);
+
         JsonObject obj = new JsonObject();
         copyID(stk, obj);
         copyCount(stk, obj);
@@ -44,19 +50,42 @@ public final class ItemStackSerializer implements JsonSerializer<ItemStack> {
         copySpecificMeta(stk, obj);
         return obj;
     }
-
+    /**
+     * Copies the item ID from the specified {@link org.bukkit.inventory.ItemStack} to the specified {@link org.bukkit.craftbukkit.libs.com.google.gson.JsonObject}.
+     *
+     * @param stack The item stack.
+     * @param obj The JSON object.
+     */
     public void copyID(ItemStack stack, JsonObject obj) {
         obj.addProperty(ItemStackFormat.ID, stack.getType().getId());
     }
 
+    /**
+     * Copies the item amount from the specified {@link org.bukkit.inventory.ItemStack} to the specified {@link org.bukkit.craftbukkit.libs.com.google.gson.JsonObject}.
+     *
+     * @param stack The item stack.
+     * @param obj The JSON object.
+     */
     public void copyCount(ItemStack stack, JsonObject obj) {
         obj.addProperty(ItemStackFormat.COUNT, stack.getAmount());
     }
 
+    /**
+     * Copies the item damage value from the specified {@link org.bukkit.inventory.ItemStack} to the specified {@link org.bukkit.craftbukkit.libs.com.google.gson.JsonObject}.
+     *
+     * @param stack The item stack.
+     * @param obj The JSON object.
+     */
     public void copyDamage(ItemStack stack, JsonObject obj) {
         obj.addProperty(ItemStackFormat.DAMAGE, stack.getDurability());
     }
 
+    /**
+     * Copies the item name from the specified {@link org.bukkit.inventory.ItemStack} to the specified {@link org.bukkit.craftbukkit.libs.com.google.gson.JsonObject}.
+     *
+     * @param stack The item stack.
+     * @param obj The JSON object.
+     */
     public void copyName(ItemStack stack, JsonObject obj) {
         if (stack.getItemMeta() == null)
             return;
@@ -65,6 +94,12 @@ public final class ItemStackSerializer implements JsonSerializer<ItemStack> {
         obj.addProperty(ItemStackFormat.NAME, stack.getItemMeta().getDisplayName());
     }
 
+    /**
+     * Copies the item lore from the specified {@link org.bukkit.inventory.ItemStack} to the specified {@link org.bukkit.craftbukkit.libs.com.google.gson.JsonObject}.
+     *
+     * @param stack The item stack.
+     * @param obj The JSON object.
+     */
     public void copyLore(ItemStack stack, JsonObject obj) {
         if (stack.getItemMeta() == null)
             return;
@@ -73,6 +108,12 @@ public final class ItemStackSerializer implements JsonSerializer<ItemStack> {
         obj.add(ItemStackFormat.LORE, gson.toJsonTree(stack.getItemMeta().getLore()));
     }
 
+    /**
+     * Copies the item enchants from the specified {@link org.bukkit.inventory.ItemStack} to the specified {@link org.bukkit.craftbukkit.libs.com.google.gson.JsonObject}.
+     *
+     * @param stack
+     * @param obj
+     */
     public void copyEnchants(ItemStack stack, JsonObject obj) {
         if (stack.getEnchantments().isEmpty())
             return;
@@ -83,6 +124,12 @@ public final class ItemStackSerializer implements JsonSerializer<ItemStack> {
         obj.add(ItemStackFormat.ENCHANTS, enchantTree);
     }
 
+    /**
+     * Copies the item repair cost from the specified {@link org.bukkit.inventory.ItemStack} to the specified {@link org.bukkit.craftbukkit.libs.com.google.gson.JsonObject}.
+     *
+     * @param stack The item stack.
+     * @param obj The JSON object.
+     */
     public void copyRepairCost(ItemStack stack, JsonObject obj) {
         if (!(stack.getItemMeta() instanceof Repairable))
             return;
@@ -91,6 +138,12 @@ public final class ItemStackSerializer implements JsonSerializer<ItemStack> {
             obj.addProperty(ItemStackFormat.REPAIRCOST, rp.getRepairCost());
     }
 
+    /**
+     * Copies the specific item meta from the specified {@link org.bukkit.inventory.ItemStack} to the specified {@link org.bukkit.craftbukkit.libs.com.google.gson.JsonObject}.
+     *
+     * @param stack The item stack.
+     * @param obj The JSON object.
+     */
     public void copySpecificMeta(ItemStack stack, JsonObject obj) {
         if (!stack.hasItemMeta())
             return;
@@ -151,6 +204,16 @@ public final class ItemStackSerializer implements JsonSerializer<ItemStack> {
         }
     }
 
+    /**
+     * The singleton serializer instance.
+     */
     private static final ItemStackSerializer instance = new ItemStackSerializer();
+
+    /**
+     * Gets the singleton instance of this serializer.
+     *
+     * @return The serializer instance.
+     */
     public static final ItemStackSerializer get() { return instance; }
+
 }

@@ -13,23 +13,11 @@ import com.dhlab.xephyr.bukkit.commands.registration.context.WrapperRegistration
  */
 public class WrapperBasedCommandRegistrator implements CommandRegistrator<WrapperRegistrationContext> {
 
-    /**
-     * Gets the type of the registration context.
-     *
-     * @return The class of the registration context.
-     */
     @Override
     public Class<WrapperRegistrationContext> getContextType() {
         return WrapperRegistrationContext.class;
     }
 
-    /**
-     * Registers commands in the specified context.
-     *
-     * @param framework The command framework.
-     * @param context The registration context.
-     * @throws CommandRegistrationException
-     */
     @Override
     public void registerCommands(CommandFramework framework, WrapperRegistrationContext context) throws CommandRegistrationException {
         CommandWrapper wrapper = context.getWrapper();

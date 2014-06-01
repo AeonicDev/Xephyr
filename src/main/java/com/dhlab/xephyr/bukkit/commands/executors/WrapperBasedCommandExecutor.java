@@ -34,21 +34,11 @@ public class WrapperBasedCommandExecutor implements XCommandExecutor {
         this.wrapper = wrapper;
     }
 
-    /**
-     * Gets the command label.
-     *
-     * @return The command label.
-     */
     @Override
     public String label() {
         return label;
     }
 
-    /**
-     * Handles the command specified by the wrapper.
-     *
-     * @param args The arguments associated with the command.
-     */
     @Override
     public void handleCommand(CommandArgs args) {
         try {

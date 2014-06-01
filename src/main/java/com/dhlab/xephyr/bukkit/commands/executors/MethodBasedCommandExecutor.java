@@ -62,21 +62,11 @@ public class MethodBasedCommandExecutor implements XCommandExecutor {
             throw new IllegalArgumentException("Command annotation cannot require both player and console.");
     }
 
-    /**
-     * Gets the command label.
-     *
-     * @return The command label.
-     */
     @Override
     public String label() {
         return label;
     }
 
-    /**
-     * Handles a command with the specified {@link com.dhlab.xephyr.bukkit.commands.CommandArgs}.
-     *
-     * @param args The arguments object to pass.
-     */
     @Override
     public void handleCommand(CommandArgs args) {
         try {

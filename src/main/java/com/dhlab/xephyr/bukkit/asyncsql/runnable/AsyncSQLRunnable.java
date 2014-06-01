@@ -40,10 +40,10 @@ public class AsyncSQLRunnable extends BukkitRunnable {
     /**
      * Creates a new instance of a runnable SQL statement.
      *
-     * @param plugin The plugin this statement is being executed for
-     * @param st The statement
-     * @param callback The callback to execute afterward (receives the results)
-     * @param type The execution type of the statement
+     * @param plugin The plugin this statement is being executed for.
+     * @param st The statement.
+     * @param callback The callback to execute afterward (receives the results).
+     * @param type The execution type of the statement.
      */
     public AsyncSQLRunnable(JavaPlugin plugin, PreparedStatement st, SQLResultReceiver callback, SQLExecutionType type) {
         Validate.notNull(plugin);
@@ -56,9 +56,6 @@ public class AsyncSQLRunnable extends BukkitRunnable {
         this.execType = type;
     }
 
-    /**
-     * Wraps execution in the {@link Runnable#run()} method.
-     */
     @Override
     public void run() {
         try {
@@ -74,10 +71,10 @@ public class AsyncSQLRunnable extends BukkitRunnable {
     /**
      * Actually executes the {@link java.sql.PreparedStatement}.
      *
-     * @param st
-     * @param type
-     * @return
-     * @throws SQLException
+     * @param st The statement to execute.
+     * @param type The type of execution.
+     * @return The result of the statement's execution.
+     * @throws SQLException When an error is encountered.
      */
     private Object execute(PreparedStatement st, SQLExecutionType type) throws SQLException {
         switch (type) {
@@ -94,9 +91,9 @@ public class AsyncSQLRunnable extends BukkitRunnable {
     /**
      * Executes the callback provided by the statement.
      *
-     * @param callback The callback
-     * @param type The type of statement
-     * @param obj The result of the statement
+     * @param callback The callback.
+     * @param type The type of statement.
+     * @param obj The result of the statement.
      */
     private void callback(final SQLResultReceiver callback, final SQLExecutionType type, final Object obj) {
         Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {

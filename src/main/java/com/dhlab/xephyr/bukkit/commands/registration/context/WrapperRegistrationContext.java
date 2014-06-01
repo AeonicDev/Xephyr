@@ -34,11 +34,6 @@ public class WrapperRegistrationContext implements CommandRegistrationContext<Wr
         return wrapper;
     }
 
-    /**
-     * Returns the type of the registrator this context is for.
-     *
-     * @return The class of the registrator.
-     */
     @Override
     public Class<WrapperBasedCommandRegistrator> getExecutorType() {
         return WrapperBasedCommandRegistrator.class;

@@ -28,14 +28,6 @@ public class BukkitCommand extends Command {
         this.basePlugin = base;
     }
 
-    /**
-     * Executes this command.
-     *
-     * @param sender The sender of the command being handled.
-     * @param label The label of the command being handled.
-     * @param args The arguments of the command being handled.
-     * @return The success of the command execution.
-     */
     @Override
     public boolean execute(CommandSender sender, String label, String[] args) {
         boolean success = false;

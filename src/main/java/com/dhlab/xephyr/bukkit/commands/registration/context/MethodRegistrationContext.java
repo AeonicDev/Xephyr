@@ -34,11 +34,6 @@ public class MethodRegistrationContext implements CommandRegistrationContext<Met
         return toRegister;
     }
 
-    /**
-     * Gets the type of the registrator.
-     *
-     * @return The type of the registrator.
-     */
     @Override
     public Class<MethodBasedCommandRegistrator> getExecutorType() {
         return MethodBasedCommandRegistrator.class;
