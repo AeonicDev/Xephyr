@@ -14,10 +14,7 @@ import org.bukkit.plugin.SimplePluginManager;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -135,12 +132,7 @@ public class CommandFramework {
 
                 // get the current argument count
                 int subCommand = args.length - i;
-                String[] finalArgs = new String[subCommand];
-                // start counting from 0 to the subcommand count
-                for (int x = 0; x < subCommand; x++) {
-                    // get all of the arguments past the subcommand count
-                    finalArgs[x] = args[x + (subCommand - 1)];
-                }
+                String[] finalArgs = Arrays.copyOfRange(args, subCommand, args.length);
                 try {
                     // handle the command with the found executor
                     executor.handleCommand(new CommandArgs(sender, label, finalArgs));
