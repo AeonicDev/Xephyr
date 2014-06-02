@@ -10,7 +10,7 @@ public interface Named {
     /**
      * Get the name of this object.
      *
-     * @return
+     * @return The name.
      */
     public String getName();
 
