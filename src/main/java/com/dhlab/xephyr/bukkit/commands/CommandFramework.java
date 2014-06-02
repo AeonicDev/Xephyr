@@ -131,7 +131,7 @@ public class CommandFramework {
 
 
                 // get the current argument count
-                int subCommand = args.length - i;
+                int subCommand = args.length - i - (args.length == 1 ? 0 : 1);
                 String[] finalArgs = Arrays.copyOfRange(args, subCommand, args.length);
                 try {
                     // handle the command with the found executor
