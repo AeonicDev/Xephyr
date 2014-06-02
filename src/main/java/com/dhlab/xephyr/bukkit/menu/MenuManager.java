@@ -2,8 +2,9 @@ package com.dhlab.xephyr.bukkit.menu;
 
 import com.dhlab.xephyr.bukkit.module.Module;
 import com.dhlab.xephyr.bukkit.plugin.PluginBootstrapper;
+import com.dhlab.xephyr.generic.Enableable;
+import com.dhlab.xephyr.generic.management.ClassBasedManager;
 import com.dhlab.xephyr.generic.management.ManagedNotFoundException;
-import com.dhlab.xephyr.generic.management.Manager;
 import org.apache.commons.lang.Validate;
 
 import java.util.*;
@@ -14,7 +15,7 @@ import java.util.*;
  * @author hauno
  * @see com.dhlab.xephyr.bukkit.menu.InventoryMenu
  */
-public class MenuManager implements Manager<InventoryMenu, Class> {
+public class MenuManager implements ClassBasedManager<InventoryMenu>, Enableable {
 
     /**
      * The underlying storage mechanism.
@@ -104,4 +105,16 @@ public class MenuManager implements Manager<InventoryMenu, Class> {
         return menus.toArray(new InventoryMenu[menus.size()]);
     }
 
+    @Override
+    public void onEnable() {
+        for (InventoryMenu menu : this.getContents()) {
+            this.bootstrap.getPlugin().getServer().getPluginManager().registerEvents(menu, this.bootstrap.getPlugin());
+        }
+    }
+
+    @Override
+    public void onDisable() {
+
+    }
+    
 }
