@@ -6,7 +6,7 @@ It contains many utilities usually only found in proprietary plugins for large s
 
 Features
 ==
-Xephyr separates the most plugin actions into modules. These modules can interact with and even depend on eachother. The simplest modules are classes that extend Xephyr's module class and implement the Bukkit Listener interface to handle events. Note that Xephyr will automatically register a module as a listener if it finds it to be an instance of one.
+Xephyr separates most plugin actions into modules. These modules can interact with and even depend on eachother. The simplest modules are classes that extend Xephyr's module class and implement the Bukkit Listener interface to handle events. Note that Xephyr will automatically register a module as a listener if it finds it to be an instance of one.
 
 Building
 ==
