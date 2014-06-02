@@ -92,6 +92,15 @@ public abstract class PluginBootstrapper implements Enableable {
         return itemManager;
     }
 
+    /**
+     * Gets the {@link com.dhlab.xephyr.bukkit.menu.MenuManager} that this bootstrapper uses.
+     *
+     * @return The MenuManager instance.
+     */
+    public MenuManager getMenuManager() {
+        return this.menuManager;
+    }
+
 
     /**
      * Gets the plugin logger.

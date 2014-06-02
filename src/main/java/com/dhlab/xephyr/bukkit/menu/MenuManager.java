@@ -116,5 +116,5 @@ public class MenuManager implements ClassBasedManager<InventoryMenu>, Enableable
     public void onDisable() {
 
     }
-    
+
 }
