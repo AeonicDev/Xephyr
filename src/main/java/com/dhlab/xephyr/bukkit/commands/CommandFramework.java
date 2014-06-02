@@ -111,7 +111,7 @@ public class CommandFramework {
         }
         args = realArgs.toArray(new String[realArgs.size()]);
 
-        for (int i = args.length; i >= 0; i--) {
+        for (int i = args.length - 1; i >= 0; i--) {
             // now we recursively backtrack, adding all of the following arguments with a .
             // to determine if we have a command executor with a sub-label.
             StringBuilder sb = new StringBuilder();
