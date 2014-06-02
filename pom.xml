@@ -6,7 +6,7 @@
 
     <groupId>com.dhlab.xephyr</groupId>
     <artifactId>Xephyr</artifactId>
-    <version>2.6-SNAPSHOT</version>
+    <version>1.0</version>
     <description>Plugin Engine API with a variety of utilities.</description>
     
     <properties>
@@ -19,12 +19,6 @@
         <repository>
             <id>bukkit-repo</id>
             <url>http://repo.bukkit.org/content/groups/public/</url>
-        </repository>
-        <!-- for the Tab API -->
-        <repository>
-            <id>comphenix-rep</id>
-            <name>Comphenix Repository</name>
-            <url>http://repo.comphenix.net/content/groups/public</url>
         </repository>
     </repositories>
 
