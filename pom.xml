@@ -6,7 +6,7 @@
 
     <groupId>com.dhlab.xephyr</groupId>
     <artifactId>Xephyr</artifactId>
-    <version>1.0</version>
+    <version>1.0-SNAPSHOT</version>
     <description>Plugin Engine API with a variety of utilities.</description>
     
     <properties>
@@ -29,7 +29,7 @@
             <version>1.7.9-R0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
-        <!-- For asynchronous MySQL -->
+
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
