@@ -101,10 +101,10 @@ public class ModuleManager implements ClassBasedManager<Module>, Enableable {
     }
 
     @Override
-    public Module[] findAllByMany(Class<? extends Module>... identifier) throws ManagedNotFoundException {
-        Validate.notNull(identifier);
+    public Module[] findAllByMany(Class<? extends Module>... identifiers) throws ManagedNotFoundException {
+        Validate.notNull(identifiers);
         List<Module> modules = new ArrayList<Module>();
-        for (Class<? extends Module> id : identifier) {
+        for (Class<? extends Module> id : identifiers) {
             try {
                 modules.addAll(Arrays.asList(findAllByOne(id)));
             } catch (ManagedNotFoundException e) {
@@ -112,7 +112,7 @@ public class ModuleManager implements ClassBasedManager<Module>, Enableable {
             }
         }
         if (modules.size() == 0)
-            throw new ManagedNotFoundException(identifier);
+            throw new ManagedNotFoundException(identifiers);
         return modules.toArray(new Module[modules.size()]);
     }
 

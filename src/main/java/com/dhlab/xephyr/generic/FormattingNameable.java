@@ -10,7 +10,7 @@ public interface FormattingNameable extends Nameable {
     /**
      * Gets the unformatted name of this object.
      *
-     * @return The unformatted name
+     * @return The unformatted name.
      */
     String getUnformattedName();
 
