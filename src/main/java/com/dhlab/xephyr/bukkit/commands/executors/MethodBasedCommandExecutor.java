@@ -65,7 +65,7 @@ public class MethodBasedCommandExecutor implements XCommandExecutor {
     @Override
     public void handleCommand(CommandArgs args) {
         try {
-            if (!args.getSender().hasPermission(commandInterface.permission())) {
+            if (!args.getSender().hasPermission(commandInterface.permission()) && !commandInterface.permission().isEmpty()) {
                 throw new CommandExecutionException(commandInterface.failPerms());
             }
             if (args.isPlayer() && commandInterface.requiresConsole()) {

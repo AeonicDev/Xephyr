@@ -45,7 +45,7 @@ public class WrapperBasedCommandExecutor implements XCommandExecutor {
     @Override
     public void handleCommand(CommandArgs args) {
         try {
-            if (!args.getSender().hasPermission(wrapper.permission())) {
+            if (!args.getSender().hasPermission(wrapper.permission()) && !wrapper.permission().isEmpty()) {
                 throw new CommandExecutionException(wrapper.getPermissionFailureMessage());
             }
             if (args.isPlayer() && wrapper.requiresConsole()) {
