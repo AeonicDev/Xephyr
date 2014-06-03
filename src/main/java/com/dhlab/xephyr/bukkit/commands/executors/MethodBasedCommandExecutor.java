@@ -50,7 +50,7 @@ public class MethodBasedCommandExecutor implements XCommandExecutor {
         Validate.notNull(m);
         this.label = label;
         this.obj = obj;
-        Validate.isTrue(m.getParameterTypes().length != 1 || !m.getParameterTypes()[0].equals(CommandArgs.class), "Method must take proper arguments!");
+        Validate.isTrue(!(m.getParameterTypes().length != 1 || !m.getParameterTypes()[0].equals(CommandArgs.class)), "Method must take proper arguments!");
         this.m = m;
         commandInterface = m.getAnnotation(Command.class);
         Validate.notNull(commandInterface, "Method was not annotated as a Command!");

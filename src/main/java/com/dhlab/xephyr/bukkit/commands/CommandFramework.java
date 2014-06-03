@@ -94,6 +94,14 @@ public class CommandFramework {
      * @return The result of the command execution.
      */
     public boolean handleCommand(CommandSender sender, org.bukkit.command.Command cmd, String label, String[] args) {
+        if (args.length == 0) {
+            if (this.executorMap.get(label) != null) {
+                XCommandExecutor executor = this.executorMap.get(label);
+                executor.handleCommand(new CommandArgs(sender, label, args));
+                return true;
+            }
+        }
+
         String joined = Joiner.on(" ").skipNulls().join(args);
 
         // alright, so we basically have to rejoin and then split the string again, except by double quotes and spaces to
@@ -110,7 +118,7 @@ public class CommandFramework {
         }
         args = realArgs.toArray(new String[realArgs.size()]);
 
-        for (int i = args.length - 1; i >= 0; i--) {
+        for (int i = args.length - 1; i > -1; i--) {
             // now we recursively backtrack, adding all of the following arguments with a .
             // to determine if we have a command executor with a sub-label.
             StringBuilder sb = new StringBuilder();
