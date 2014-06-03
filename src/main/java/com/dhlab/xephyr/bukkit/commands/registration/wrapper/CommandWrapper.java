@@ -1,6 +1,6 @@
 package com.dhlab.xephyr.bukkit.commands.registration.wrapper;
 
-import com.dhlab.xephyr.bukkit.commands.XCommandExecutor;
+import com.dhlab.xephyr.bukkit.commands.ICommandExecutor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ import java.util.List;
  *
  * @author maladr0it
  */
-public abstract class CommandWrapper implements XCommandExecutor {
+public abstract class CommandWrapper implements ICommandExecutor {
 
     /**
      * The command label.

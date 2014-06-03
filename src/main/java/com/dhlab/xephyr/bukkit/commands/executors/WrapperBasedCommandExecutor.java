@@ -2,7 +2,7 @@ package com.dhlab.xephyr.bukkit.commands.executors;
 
 import com.dhlab.xephyr.bukkit.commands.CommandArgs;
 import com.dhlab.xephyr.bukkit.commands.CommandExecutionException;
-import com.dhlab.xephyr.bukkit.commands.XCommandExecutor;
+import com.dhlab.xephyr.bukkit.commands.ICommandExecutor;
 import com.dhlab.xephyr.bukkit.commands.registration.wrapper.CommandWrapper;
 
 /**
@@ -11,7 +11,7 @@ import com.dhlab.xephyr.bukkit.commands.registration.wrapper.CommandWrapper;
  * @author maladr0it
  * @see com.dhlab.xephyr.bukkit.commands.registration.wrapper.CommandWrapper
  */
-public class WrapperBasedCommandExecutor implements XCommandExecutor {
+public class WrapperBasedCommandExecutor implements ICommandExecutor {
 
     /**
      * The label for this command.

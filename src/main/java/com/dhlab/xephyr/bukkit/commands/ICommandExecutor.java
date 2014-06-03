@@ -5,7 +5,7 @@ package com.dhlab.xephyr.bukkit.commands;
  *
  * @author maladr0it
  */
-public interface XCommandExecutor {
+public interface ICommandExecutor {
 
     /**
      * The command label.

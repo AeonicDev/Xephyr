@@ -2,7 +2,7 @@ package com.dhlab.xephyr.bukkit.commands.executors;
 
 import com.dhlab.xephyr.bukkit.commands.CommandArgs;
 import com.dhlab.xephyr.bukkit.commands.CommandExecutionException;
-import com.dhlab.xephyr.bukkit.commands.XCommandExecutor;
+import com.dhlab.xephyr.bukkit.commands.ICommandExecutor;
 import com.dhlab.xephyr.bukkit.commands.registration.method.Command;
 
 import java.lang.reflect.InvocationTargetException;
@@ -14,7 +14,7 @@ import java.lang.reflect.Method;
  * @author maladr0it
  * @see com.dhlab.xephyr.bukkit.commands.registration.method.Command
  */
-public class MethodBasedCommandExecutor implements XCommandExecutor {
+public class MethodBasedCommandExecutor implements ICommandExecutor {
 
     /**
      * The object containing the method we execute.

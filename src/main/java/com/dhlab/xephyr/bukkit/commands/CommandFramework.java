@@ -30,7 +30,7 @@ public class CommandFramework {
     /**
      * The map of command executors.
      */
-    protected final Map<String, XCommandExecutor> executorMap = new HashMap<String, XCommandExecutor>();
+    protected final Map<String, ICommandExecutor> executorMap = new HashMap<String, ICommandExecutor>();
 
     /**
      * The map of command registrators.
@@ -100,7 +100,7 @@ public class CommandFramework {
         // alright, so we basically have to rejoin and then split the string again, except by double quotes and spaces to
         // provide access to what is mentioned in the comment above the declaration of the doubleQuoteMatcher.
         Matcher argMatcher = doubleQuoteMatcher.matcher(joined);
-        List<String> realArgs = new ArrayList<String>();
+        List<String> realArgs = new ArrayList<>();
         while (argMatcher.find()) {
             // add to the realArgs list, we will use that.toArray() to change args to our version of it.
             // also, remove quotes at beginning and end for ease of use in other plugins.
@@ -124,15 +124,10 @@ public class CommandFramework {
             }
             String templabel = sb.toString();
             if (this.executorMap.get(templabel) != null) {
-                XCommandExecutor executor = executorMap.get(templabel);
-                // now we have to create an array of arguments that removes all of the cruff.
-                // for example, if the label is command.subcommand.sub2, we need to remove the sub-args
-                // "subcommand" and "sub2" from the arguments.
-
-
-                // get the current argument count
-                int subCommand = args.length - i - (args.length == 1 ? 0 : 1);
-                String[] finalArgs = Arrays.copyOfRange(args, subCommand, args.length);
+                ICommandExecutor executor = executorMap.get(templabel);
+                String[] finalArgs = new String[0];
+                if (args.length != 0)
+                    finalArgs = Arrays.copyOfRange(args, args.length - i, args.length);
                 try {
                     // handle the command with the found executor
                     executor.handleCommand(new CommandArgs(sender, label, finalArgs));
@@ -151,7 +146,7 @@ public class CommandFramework {
      *
      * @param executor The executor to be added.
      */
-    public void addExecutor(XCommandExecutor executor) {
+    public void addExecutor(ICommandExecutor executor) {
         this.executorMap.put(executor.label(), executor);
         String realLabel = executor.label().split("\\.")[0];
         commandMapping.register(realLabel, new BukkitCommand(realLabel, plugin));
