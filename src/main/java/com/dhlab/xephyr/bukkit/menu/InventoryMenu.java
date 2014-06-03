@@ -68,7 +68,7 @@ public class InventoryMenu implements FormattingNamed, Sizeable, Listener {
     public InventoryMenu(String name, int size) {
         this(name);
         Validate.isTrue(size % 9 == 0, "Size must be divisible by 9");
-        Validate.isTrue(size > 9, "Size must be at least 9!");
+        Validate.isTrue(size < 9, "Size must be at least 9!");
         Validate.isTrue(size < MAX_INVENTORY_SIZE, "Size cannot be larger than 54!");
         setSize(size);
     }
