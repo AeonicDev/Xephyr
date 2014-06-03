@@ -165,7 +165,7 @@ public class CommandFramework {
      */
     public void registerCommand(CommandRegistrationContext context) {
         if (commandRegistrators.get(context.getClass()) == null)
-            throw new NotImplementedException();
+            throw new UnsupportedOperationException();
 
         try {
             commandRegistrators.get(context.getClass()).registerCommands(this, context);

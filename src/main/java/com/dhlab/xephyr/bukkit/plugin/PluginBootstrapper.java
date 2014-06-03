@@ -5,6 +5,7 @@ import com.dhlab.xephyr.bukkit.items.ItemManager;
 import com.dhlab.xephyr.bukkit.menu.MenuManager;
 import com.dhlab.xephyr.bukkit.module.ModuleManager;
 import com.dhlab.xephyr.generic.Enableable;
+import net.minecraft.util.org.apache.commons.lang3.Validate;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.logging.Logger;
@@ -48,7 +49,7 @@ public abstract class PluginBootstrapper implements Enableable {
      * @param plugin The Bukkit JavaPlugin to bootstrap.
      */
     public PluginBootstrapper(JavaPlugin plugin) {
-        if (plugin == null) throw new NullPointerException("Plugin cannot be null.");
+        Validate.notNull(plugin);
         this.plugin = plugin;
         commandFramework = new CommandFramework(plugin);
         moduleManager = new ModuleManager(this);
