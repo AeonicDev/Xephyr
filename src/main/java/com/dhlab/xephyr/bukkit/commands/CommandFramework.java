@@ -146,7 +146,7 @@ public class CommandFramework {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                //return true;
+                return true;
             }
         }
         // as a matter of fact, no, we did not handle a command.
