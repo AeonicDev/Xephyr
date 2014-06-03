@@ -1,6 +1,7 @@
 package com.dhlab.xephyr.bukkit.commands.registration.wrapper;
 
 import com.dhlab.xephyr.bukkit.commands.XCommandExecutor;
+import net.minecraft.util.org.apache.commons.lang3.Validate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,6 +64,7 @@ public abstract class CommandWrapper implements XCommandExecutor {
      * @param aliases Aliases of this command.
      */
     public CommandWrapper(String label, String[] aliases) {
+        Validate.notNull(label);
         this.label = label;
         for (String s : aliases) {
             this.aliases.add(s);

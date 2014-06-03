@@ -4,6 +4,7 @@ import com.dhlab.xephyr.bukkit.commands.CommandArgs;
 import com.dhlab.xephyr.bukkit.commands.CommandExecutionException;
 import com.dhlab.xephyr.bukkit.commands.XCommandExecutor;
 import com.dhlab.xephyr.bukkit.commands.registration.wrapper.CommandWrapper;
+import net.minecraft.util.org.apache.commons.lang3.Validate;
 
 /**
  * Executes commands embedded in {@link com.dhlab.xephyr.bukkit.commands.registration.wrapper.CommandWrapper} objects.
@@ -30,6 +31,8 @@ public class WrapperBasedCommandExecutor implements XCommandExecutor {
      * @param wrapper The command wrapper.
      */
     public WrapperBasedCommandExecutor(String label, CommandWrapper wrapper) {
+        Validate.notNull(label);
+        Validate.notNull(wrapper);
         this.label = label;
         this.wrapper = wrapper;
     }
@@ -53,7 +56,7 @@ public class WrapperBasedCommandExecutor implements XCommandExecutor {
             }
             wrapper.handleCommand(args);
         } catch (CommandExecutionException e) {
-            args.getPlayer().sendMessage(e.getMessage());
+            args.getSender().sendMessage(e.getMessage());
         }
     }
 
