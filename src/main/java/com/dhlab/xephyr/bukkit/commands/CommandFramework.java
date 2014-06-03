@@ -118,7 +118,7 @@ public class CommandFramework {
         }
         args = realArgs.toArray(new String[realArgs.size()]);
 
-        for (int i = args.length - 1; i > -1; i--) {
+        for (int i = args.length - 1; i >= 0; i--) {
             // now we recursively backtrack, adding all of the following arguments with a .
             // to determine if we have a command executor with a sub-label.
             StringBuilder sb = new StringBuilder();
@@ -139,6 +139,7 @@ public class CommandFramework {
 
                 // get the current argument count
                 int subCommand = args.length - i - (args.length == 1 ? 0 : 1);
+                if (subCommand < 0) subCommand = 0;
                 String[] finalArgs = Arrays.copyOfRange(args, subCommand, args.length);
                 try {
                     // handle the command with the found executor
@@ -148,6 +149,12 @@ public class CommandFramework {
                 }
                 return true;
             }
+        }
+
+        if (this.executorMap.get(label) != null) {
+            XCommandExecutor executor = this.executorMap.get(label);
+            executor.handleCommand(new CommandArgs(sender, label, args));
+            return true;
         }
         // as a matter of fact, no, we did not handle a command.
         return true;
