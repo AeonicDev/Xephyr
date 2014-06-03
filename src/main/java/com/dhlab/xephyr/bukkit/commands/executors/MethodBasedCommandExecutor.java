@@ -4,6 +4,7 @@ import com.dhlab.xephyr.bukkit.commands.CommandArgs;
 import com.dhlab.xephyr.bukkit.commands.CommandExecutionException;
 import com.dhlab.xephyr.bukkit.commands.ICommandExecutor;
 import com.dhlab.xephyr.bukkit.commands.registration.method.Command;
+import net.minecraft.util.org.apache.commons.lang3.Validate;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -44,22 +45,16 @@ public class MethodBasedCommandExecutor implements ICommandExecutor {
      * @param m The method to invoke.
      */
     public MethodBasedCommandExecutor(String label, Object obj, Method m) {
-        if (label == null)
-            throw new NullPointerException("label");
-        if (obj == null)
-            throw new NullPointerException("obj");
-        if (m == null)
-            throw new NullPointerException("m");
+        Validate.notNull(label);
+        Validate.notNull(obj);
+        Validate.notNull(m);
         this.label = label;
         this.obj = obj;
-        if (m.getParameterTypes().length != 1 || !m.getParameterTypes()[0].equals(CommandArgs.class))
-            throw new IllegalArgumentException("m");
+        Validate.isTrue(!(m.getParameterTypes().length != 1 || !m.getParameterTypes()[0].equals(CommandArgs.class)), "Method must take proper arguments!");
         this.m = m;
         commandInterface = m.getAnnotation(Command.class);
-        if (commandInterface == null)
-            throw new NullPointerException("m does not have Command annotation!");
-        if (commandInterface.requiresConsole() && commandInterface.requiresPlayer())
-            throw new IllegalArgumentException("Command annotation cannot require both player and console.");
+        Validate.notNull(commandInterface, "Method was not annotated as a Command!");
+        Validate.isTrue(!(commandInterface.requiresConsole() && commandInterface.requiresPlayer()), "Command cannot require both player and console!");
     }
 
     @Override
@@ -70,7 +65,7 @@ public class MethodBasedCommandExecutor implements ICommandExecutor {
     @Override
     public void handleCommand(CommandArgs args) {
         try {
-            if (!args.getSender().hasPermission(commandInterface.permission())) {
+            if (!args.getSender().hasPermission(commandInterface.permission()) && !commandInterface.permission().isEmpty()) {
                 throw new CommandExecutionException(commandInterface.failPerms());
             }
             if (args.isPlayer() && commandInterface.requiresConsole()) {
@@ -81,14 +76,11 @@ public class MethodBasedCommandExecutor implements ICommandExecutor {
             }
             m.invoke(obj, args);
         } catch (IllegalAccessException e) {
-            args.getPlayer().sendMessage(e.getMessage());
             e.printStackTrace();
         } catch (InvocationTargetException e) {
-            args.getPlayer().sendMessage(e.getTargetException().getMessage());
             e.printStackTrace();
         } catch (CommandExecutionException e) {
-            args.getPlayer().sendMessage(e.getMessage());
-            e.printStackTrace();
+            args.getSender().sendMessage(e.getMessage());
         }
     }
 

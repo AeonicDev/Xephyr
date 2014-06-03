@@ -4,6 +4,7 @@ import com.dhlab.xephyr.bukkit.commands.CommandArgs;
 import com.dhlab.xephyr.bukkit.commands.CommandExecutionException;
 import com.dhlab.xephyr.bukkit.commands.ICommandExecutor;
 import com.dhlab.xephyr.bukkit.commands.registration.wrapper.CommandWrapper;
+import net.minecraft.util.org.apache.commons.lang3.Validate;
 
 /**
  * Executes commands embedded in {@link com.dhlab.xephyr.bukkit.commands.registration.wrapper.CommandWrapper} objects.
@@ -30,6 +31,8 @@ public class WrapperBasedCommandExecutor implements ICommandExecutor {
      * @param wrapper The command wrapper.
      */
     public WrapperBasedCommandExecutor(String label, CommandWrapper wrapper) {
+        Validate.notNull(label);
+        Validate.notNull(wrapper);
         this.label = label;
         this.wrapper = wrapper;
     }
@@ -42,7 +45,7 @@ public class WrapperBasedCommandExecutor implements ICommandExecutor {
     @Override
     public void handleCommand(CommandArgs args) {
         try {
-            if (!args.getSender().hasPermission(wrapper.permission())) {
+            if (!args.getSender().hasPermission(wrapper.permission()) && !wrapper.permission().isEmpty()) {
                 throw new CommandExecutionException(wrapper.getPermissionFailureMessage());
             }
             if (args.isPlayer() && wrapper.requiresConsole()) {
@@ -53,7 +56,7 @@ public class WrapperBasedCommandExecutor implements ICommandExecutor {
             }
             wrapper.handleCommand(args);
         } catch (CommandExecutionException e) {
-            args.getPlayer().sendMessage(e.getMessage());
+            args.getSender().sendMessage(e.getMessage());
         }
     }
 

@@ -9,13 +9,12 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Basic inventory menu API class.
@@ -67,6 +66,9 @@ public class InventoryMenu implements FormattingNamed, Sizeable, Listener {
      */
     public InventoryMenu(String name, int size) {
         this(name);
+        Validate.isTrue(size % 9 == 0, "Size must be divisible by 9");
+        Validate.isTrue(size >= 9, "Size must be at least 9!");
+        Validate.isTrue(size < MAX_INVENTORY_SIZE, "Size cannot be larger than 54!");
         setSize(size);
     }
 
@@ -181,10 +183,25 @@ public class InventoryMenu implements FormattingNamed, Sizeable, Listener {
      * @param event The inventory event to be passed to the menu
      */
     @EventHandler
-    public void onInventoryEvent(InventoryClickEvent event) {
+    public void onInventoryEvent(final InventoryClickEvent event) {
         if (!event.getInventory().getName().equals(this.getName())) return;
-        this.click((Player)event.getWhoClicked(), event.getSlot());
+
         event.setCancelled(true);
+
+        if (!event.getSlotType().equals(InventoryType.SlotType.CONTAINER)) return;
+
+        InventoryAction[] acceptableActions = {
+            InventoryAction.PICKUP_ONE,
+            InventoryAction.PICKUP_SOME,
+            InventoryAction.PICKUP_ALL,
+            InventoryAction.PICKUP_HALF
+        };
+
+        List<InventoryAction> actionList = Arrays.asList(acceptableActions);
+
+        if (!actionList.contains(event.getAction())) return;
+
+        this.click((Player)event.getWhoClicked(), event.getSlot());
     }
 
     /**

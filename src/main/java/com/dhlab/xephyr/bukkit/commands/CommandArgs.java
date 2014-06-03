@@ -1,5 +1,6 @@
 package com.dhlab.xephyr.bukkit.commands;
 
+import org.apache.commons.lang.Validate;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -33,12 +34,9 @@ public class CommandArgs {
      * @param args The arguments from the command that will be internalized.
      */
     public CommandArgs(CommandSender sender, String label, String[] args) {
-        if (sender == null)
-            throw new NullPointerException("sender");
-        if (label == null)
-            throw new NullPointerException("label");
-        if (args == null)
-            throw new NullPointerException("args");
+        Validate.notNull(sender);
+        Validate.notNull(label);
+        Validate.notNull(args);
         this.sender = sender;
         this.label = label;
         this.arguments = new ArgumentPool(args);
