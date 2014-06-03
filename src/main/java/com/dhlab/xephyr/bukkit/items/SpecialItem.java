@@ -1,6 +1,7 @@
 package com.dhlab.xephyr.bukkit.items;
 
 import com.dhlab.xephyr.generic.FormattingNameable;
+import net.minecraft.util.org.apache.commons.lang3.Validate;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.event.Listener;
@@ -43,10 +44,8 @@ public class SpecialItem implements Listener,FormattingNameable {
      * @param m The material of the special item.
      */
     public SpecialItem(String name, Material m) {
-        if (name == null)
-            throw new NullPointerException("Name cannot be null!");
-        if (m == null)
-            throw new NullPointerException("Material cannot be null!");
+        Validate.notNull(name);
+        Validate.notNull(m);
         this.name = name;
         this.material = m;
     }

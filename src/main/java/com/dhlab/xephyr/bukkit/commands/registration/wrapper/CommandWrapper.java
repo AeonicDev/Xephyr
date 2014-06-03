@@ -189,8 +189,7 @@ public abstract class CommandWrapper implements XCommandExecutor {
      * @param msg The message.
      */
     public void setPermissionFailureMessage(String msg) {
-        if (msg == null)
-            throw new NullPointerException("Permission failure message cannot be null!");
+        Validate.notNull(msg);
         this.permissionFailureMessage = msg;
     }
 
@@ -200,8 +199,7 @@ public abstract class CommandWrapper implements XCommandExecutor {
      * @param msg The message.
      */
     public void setRequirementFailureMessage(String msg) {
-        if (msg == null)
-            throw new NullPointerException("Permissions failure message cannot be null!");
+        Validate.notNull(msg);
         this.requirementFailureMessage = msg;
     }
 
