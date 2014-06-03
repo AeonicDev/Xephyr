@@ -76,14 +76,11 @@ public class MethodBasedCommandExecutor implements XCommandExecutor {
             }
             m.invoke(obj, args);
         } catch (IllegalAccessException e) {
-            args.getPlayer().sendMessage(e.getMessage());
             e.printStackTrace();
         } catch (InvocationTargetException e) {
-            args.getPlayer().sendMessage(e.getTargetException().getMessage());
             e.printStackTrace();
         } catch (CommandExecutionException e) {
-            args.getPlayer().sendMessage(e.getMessage());
-            e.printStackTrace();
+            args.getSender().sendMessage(e.getMessage());
         }
     }
 

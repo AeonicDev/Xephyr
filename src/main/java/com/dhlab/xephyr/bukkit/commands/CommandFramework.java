@@ -123,7 +123,7 @@ public class CommandFramework {
             // to determine if we have a command executor with a sub-label.
             StringBuilder sb = new StringBuilder();
             sb.append(label);
-            for (int x = 0; x < i; x++) {
+            for (int x = 0; x <= i; x++) {
                 String sub = args[x];
                 if (sub == null || sub.length() == 0)
                     continue;
@@ -146,7 +146,7 @@ public class CommandFramework {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                return true;
+                //return true;
             }
         }
         // as a matter of fact, no, we did not handle a command.
