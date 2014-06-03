@@ -150,7 +150,7 @@ public class CommandFramework {
             }
         }
         // as a matter of fact, no, we did not handle a command.
-        return false;
+        return true;
     }
 
     /**
