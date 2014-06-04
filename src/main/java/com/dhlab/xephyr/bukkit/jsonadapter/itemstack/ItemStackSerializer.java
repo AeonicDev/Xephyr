@@ -37,7 +37,6 @@ public final class ItemStackSerializer implements JsonSerializer<ItemStack> {
     public JsonElement serialize(ItemStack stk, Type type, JsonSerializationContext jsonSerializationContext) {
         Validate.notNull(stk);
         Validate.isTrue(!stk.getType().equals(Material.AIR));
-        Validate.isTrue(stk.getAmount() == 0);
 
         JsonObject obj = new JsonObject();
         copyID(stk, obj);
