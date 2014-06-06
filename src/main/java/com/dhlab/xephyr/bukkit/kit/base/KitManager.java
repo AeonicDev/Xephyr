@@ -1,4 +1,4 @@
-package com.dhlab.xephyr.bukkit.kit;
+package com.dhlab.xephyr.bukkit.kit.base;
 
 import com.dhlab.xephyr.bukkit.plugin.PluginBootstrapper;
 import com.dhlab.xephyr.generic.Enableable;
@@ -10,14 +10,24 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * A manager for kits and other such things.
+ * A manager for kits, interfaces directly with
  * @author maladr0it
  */
 public class KitManager implements Manager<Kit, String>, Enableable {
 
+    /**
+     * The bootstrapper to manage kits for.
+     */
     protected final PluginBootstrapper bootstrapper;
+    /**
+     * A map of string->kit to hold all of the enabled kits
+     */
     protected final Map<String, Kit> kits = new HashMap<String, Kit>();
 
+    /**
+     * Accepts a pluginBootstrapper as an argument
+     * @param bootstrap
+     */
     public KitManager(PluginBootstrapper bootstrap) {
         Validate.notNull(bootstrap);
         this.bootstrapper = bootstrap;
@@ -35,7 +45,6 @@ public class KitManager implements Manager<Kit, String>, Enableable {
     @Override
     public void add(Kit obj) {
         Validate.notNull(obj);
-
     }
 
     @Override

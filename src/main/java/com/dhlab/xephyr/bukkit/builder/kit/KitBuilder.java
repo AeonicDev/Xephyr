@@ -1,8 +1,8 @@
 package com.dhlab.xephyr.bukkit.builder.kit;
 
-import com.dhlab.xephyr.bukkit.kit.Kit;
-import com.dhlab.xephyr.bukkit.kit.eventing.KitEventListener;
-import com.dhlab.xephyr.bukkit.kit.eventing.KitListener;
+import com.dhlab.xephyr.bukkit.kit.base.Kit;
+import com.dhlab.xephyr.bukkit.kit.base.listen.FluidKitListener;
+import com.dhlab.xephyr.bukkit.kit.base.listen.KitStateListener;
 import com.dhlab.xephyr.generic.builder.Builder;
 import org.apache.commons.lang.Validate;
 import org.bukkit.inventory.ItemStack;
@@ -93,7 +93,7 @@ public class KitBuilder implements Builder<Kit> {
      * Transforms the kit using an interface designed to apply many differnt things at once
      * to the kit.
      * @param transformer
-     * @return
+     * @return The instance of the KitBuilder
      */
     public KitBuilder transform(KitTransformer transformer) {
         Validate.notNull(transformer);
@@ -102,24 +102,24 @@ public class KitBuilder implements Builder<Kit> {
     }
 
     /**
-     * Adds a kit listener to the Kit.
-     * @param listener The listener to add.
-     * @return The instance of the Kitbuilder.
+     * Applies and sets up a FluidListener for the kit
+     * @param listener The FluidKitListener
+     * @return The instance of the KitBuilder
      */
-    public KitBuilder listener(KitListener<?> listener) {
+    public KitBuilder fluidListener(FluidKitListener listener) {
         Validate.notNull(listener);
-        kit.addListener(listener);
+        kit.addFluidListener(listener);
         return this;
     }
 
     /**
-     * Adds an initialization-logic listener to the kit.
-     * @param listener The listener to add.
-     * @return The instance of the KitBuilder.
+     * Applies and sets up a KitStateListener for the kit
+     * @param listener The KitStateListener
+     * @return The instance of the KitBuilder
      */
-    public KitBuilder kitListener(KitEventListener listener) {
+    public KitBuilder stateListener(KitStateListener listener) {
         Validate.notNull(listener);
-        kit.addInitializeListener(listener);
+        kit.addStateListener(listener);
         return this;
     }
 

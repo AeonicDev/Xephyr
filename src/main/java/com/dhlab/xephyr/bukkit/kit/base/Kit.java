@@ -1,20 +1,21 @@
-package com.dhlab.xephyr.bukkit.kit;
+package com.dhlab.xephyr.bukkit.kit.base;
 
 import com.dhlab.xephyr.bukkit.inventory.XephyrInventoryWorkaround;
-import com.dhlab.xephyr.bukkit.kit.eventing.KitEventListener;
-import com.dhlab.xephyr.bukkit.kit.eventing.KitListener;
-import com.dhlab.xephyr.bukkit.kit.property.KitProperties;
+import com.dhlab.xephyr.bukkit.kit.base.config.KitConfig;
+import com.dhlab.xephyr.bukkit.kit.base.listen.FluidKitListener;
+import com.dhlab.xephyr.bukkit.kit.base.listen.KitStateListener;
+import com.dhlab.xephyr.bukkit.kit.base.listen.SolidKitListener;
 import com.dhlab.xephyr.bukkit.utilities.MinecraftConstants;
-import com.dhlab.xephyr.generic.Enableable;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
+import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.entity.Player;
-import org.bukkit.event.HandlerList;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.*;
 
@@ -22,7 +23,17 @@ import java.util.*;
  * A generic "kit" class that allows for registration of listeners,
  * @author maladr0it
  */
-public class Kit implements Enableable, ConfigurationSerializable {
+public class Kit implements ConfigurationSerializable {
+
+    // register ourselves with the configuration serialization instance.
+    static {
+        ConfigurationSerialization.registerClass(Kit.class);
+    }
+
+    /**
+     * The configuration that this Kit has.
+     */
+    protected KitConfig configuration;
     /**
      * The "inventory" to use with this kit (mapping of slot # -> itemstack)
      */
@@ -44,11 +55,6 @@ public class Kit implements Enableable, ConfigurationSerializable {
     protected final Plugin plugin;
 
     /**
-     * The property holder of this kit.
-     */
-    protected final KitProperties properties;
-
-    /**
      * The ItemStack to use as the player's helmet.
      */
     protected ItemStack helmet;
@@ -66,18 +72,16 @@ public class Kit implements Enableable, ConfigurationSerializable {
     protected ItemStack boots;
 
     /**
-     * The list of listeners to be registered / used with Bukkit.
-     */
-    protected final List<KitListener<?>> listeners = new ArrayList<>();
-    /**
-     * The list of initializiat
-     */
-    protected final List<KitEventListener> initializeListeners = new ArrayList<>();
-
-    /**
      * Determines internally if onEnable has already been called.
      */
     private boolean alreadyEnabled = false;
+
+    /**
+     * The FluidKitListener-related
+     */
+    protected final Map<String, FluidKitListener> fluidListners = new HashMap<>();
+    protected final List<SolidKitListener<?>> solidListeners = new ArrayList<>();
+    protected final List<KitStateListener> stateListeners = new ArrayList<>();
 
     /**
      * Creates a new instance of a Kit object, using the string provided as the "kit metadata",
@@ -89,7 +93,7 @@ public class Kit implements Enableable, ConfigurationSerializable {
         Validate.isTrue(plugin.isEnabled(), "Plugin must be enabled before initializing a kit!");
         Validate.notNull(name);
         this.plugin = plugin;
-        this.properties = new KitProperties(this);
+        this.configuration = new KitConfig();
     }
 
     /**
@@ -116,13 +120,19 @@ public class Kit implements Enableable, ConfigurationSerializable {
         this.metadata = md;
     }
 
+    /**
+     * Returns the plugin that this kit is using.
+     * @return
+     */
     public Plugin getPlugin() {
         return plugin;
     }
 
-    public KitProperties getProperties() {
-        return properties;
-    }
+    /**
+     * Returns the configuration
+     * @return
+     */
+    public KitConfig getConfiguration() { return configuration; }
 
     /**
      * Sets a specific slot
@@ -259,56 +269,24 @@ public class Kit implements Enableable, ConfigurationSerializable {
     }
 
     /**
-     * Adds a KitListener[?] object to the listener list.
-     * @param listener The listener to add to the list.
+     * Adds a "Fluid" listener, which creates our actual Solid listeners, allowing our Fluid listener to be somewhat of a flyweight.
+     * @param listener The listener to add.
      */
-    public void addListener(KitListener<?> listener) {
-        this.listeners.add(listener);
+    public void addFluidListener(FluidKitListener listener) {
+        Validate.notNull(listener);
+        SolidKitListener<?>[] arr = listener.getSolidListeners(this);
+        for (SolidKitListener<?> k : arr) {
+            this.solidListeners.add(k);
+        }
     }
 
     /**
-     * Adds an initialization listener to the kit, used for
+     * Adds a State listener, which a
      * @param listener
      */
-    public void addInitializeListener(KitEventListener listener) {
-        this.initializeListeners.add(listener);
+    public void addStateListener(KitStateListener listener) {
+        stateListeners.add(listener);
     }
-
-
-    /**
-     * Registers events with Bukkit and the plugin manager, also calls the initialization logic
-     */
-    @Override
-    public void onEnable() {
-        if (alreadyEnabled)
-            throw new RuntimeException("Kit has already been enabled!");
-        alreadyEnabled = true;
-        for (KitEventListener init : this.initializeListeners) {
-            init.onEnable(this);
-        }
-        for (KitListener<?> listener : listeners) {
-            if (listener == null)
-                continue; // wtf?
-            Bukkit.getPluginManager().registerEvents(listener, plugin);
-        }
-    }
-
-    /**
-     * Unregisters and cleans up the bukkit-related stuff we have done.
-     */
-    @Override
-    public void onDisable() {
-        if (!alreadyEnabled)
-            throw new RuntimeException("Kit has not even been enabled!");
-        alreadyEnabled = false;
-        for (KitEventListener init : this.initializeListeners) {
-            init.onDisable(this);
-        }
-        for (KitListener<?> listener : listeners) {
-            HandlerList.unregisterAll(listener);
-        }
-    }
-
 
     /**
      * Returns true if the player has the kit metadata of this kit.
@@ -392,17 +370,42 @@ public class Kit implements Enableable, ConfigurationSerializable {
         return (slot >= MinecraftConstants.PLAYER_INVENTORY_BOOTS_SLOT && slot <= MinecraftConstants.PLAYER_INVENTORY_HELMET_SLOT);
     }
 
+    /**
+     * Only used internally by the deserialize() method.
+     * @param config
+     */
+    private void setConfiguration(KitConfig config) {
+        this.configuration = config;
+    }
+
     @Override
     public Map<String, Object> serialize() {
         Map<String, Object> serialized = new LinkedHashMap<String, Object>();
         serialized.put("name", this.getName());
+        serialized.put("plugin_name", this.getPlugin().getName());
         serialized.put("metadata", this.getMetadata());
         serialized.put("inventory", items);
+        serialized.put("configuration", configuration);
 
         return serialized;
     }
 
     public static Kit deserialize(Map<String, Object> serialized) {
+        if (!serialized.containsKey("plugin_name"))
+            throw new UnsupportedOperationException("Plugin name not found in serialized map!");
+        JavaPlugin plg = (JavaPlugin)Bukkit.getPluginManager().getPlugin((String)serialized.get("plugin_name"));
+        if (plg == null)
+            throw new NullPointerException("Failed to find plugin specified in kit!");
+        String name = null;
+        if (!serialized.containsKey("name"))
+            throw new NullPointerException("Serialized map does not contain a name!");
+        String metadata = null;
+        if (serialized.containsKey("metadata"))
+            metadata = (String)serialized.get("metadata");
+        Map<Integer, ItemStack> inv = null;
+        if (serialized.containsKey("inventory"))
+            inv = (Map<Integer, ItemStack>)serialized.get("inventory");
+        KitConfig conf = null;
 
         return null;
     }

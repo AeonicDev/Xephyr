@@ -1,6 +1,6 @@
 package com.dhlab.xephyr.bukkit.builder.kit;
 
-import com.dhlab.xephyr.bukkit.kit.Kit;
+import com.dhlab.xephyr.bukkit.kit.base.Kit;
 
 /**
  * A kit "transformer" class, allows kits to be modified externally in one class, rather than just a builder.

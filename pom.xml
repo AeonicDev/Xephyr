@@ -8,14 +8,17 @@
     <artifactId>Xephyr</artifactId>
     <version>1.0-SNAPSHOT</version>
     <description>Plugin Engine API with a variety of utilities.</description>
+
+    <name>Xephyr</name>
+    <url>http://github.com/DHLAB-Development/Xephyr/</url>
     
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.jdk.version>1.7</project.jdk.version>
-        <project.bukkit.version>v1_7_R3</project.bukkit.version>
     </properties>
 
     <repositories>
+        <!-- For bukkit itself -->
         <repository>
             <id>bukkit-repo</id>
             <url>http://repo.bukkit.org/content/groups/public/</url>
@@ -23,12 +26,14 @@
     </repositories>
 
     <dependencies>
+        <!-- For the obvious -->
         <dependency>
             <groupId>org.bukkit</groupId>
             <artifactId>craftbukkit</artifactId>
             <version>1.7.9-R0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
+        <!-- For the AsyncSQL API -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -75,9 +80,14 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
+                            <relocations>
+                                <relocation>
+                                    <pattern>com.mysql.jdbc</pattern>
+                                    <shadedPattern>com.dhlab.xephyr.internal.mysql.jdbc</shadedPattern>
+                                </relocation>
+                            </relocations>
                             <artifactSet>
                                 <includes>
-                                    <include>org.jetlang:jetlang</include>
                                     <include>mysql:mysql-connector-java</include>
                                 </includes>
                             </artifactSet>
