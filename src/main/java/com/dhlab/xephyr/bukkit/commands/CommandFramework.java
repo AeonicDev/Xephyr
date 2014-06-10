@@ -126,10 +126,8 @@ public class CommandFramework {
             if (this.executorMap.get(templabel) != null) {
                 ICommandExecutor executor = executorMap.get(templabel);
                 String[] finalArgs;
-                if (i != 0)
-                    finalArgs = Arrays.copyOfRange(args, args.length - i, args.length);
-                else
-                    finalArgs = args;
+                int subcommand = templabel.split("\\.").length - 1;
+                finalArgs = Arrays.copyOfRange(args, subcommand, args.length);
                 try {
                     // handle the command with the found executor
                     executor.handleCommand(new CommandArgs(sender, label, finalArgs));
