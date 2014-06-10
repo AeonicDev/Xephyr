@@ -87,14 +87,16 @@ public class InventoryMenu implements FormattingNamed, Sizeable, Listener {
         return size;
     }
 
+    /**
+     * This will clear the already constructed inventory size.
+     *
+     * @param newSize The new size of the object.
+     */
     @Override
     public void setSize(int newSize) {
-        if (newSize > MAX_INVENTORY_SIZE || newSize > size)
-            throw new IllegalArgumentException("Invalid inventory menu size! (Greater than Max)");
-        if (newSize < 1)
-            throw new IllegalArgumentException("Invalid inventory menu size! (Below 1)");
-        while (newSize % 9 != 0 && newSize > 9) // increase inventory size to a valid size
-            newSize++;
+        Validate.isTrue(newSize % 9 == 0, "Size must be divisible by 9");
+        Validate.isTrue(newSize >= 9, "Size must be at least 9!");
+        Validate.isTrue(newSize < MAX_INVENTORY_SIZE, "Size cannot be larger than 54!");
         this.size = newSize;
         fillSlots();
     }
