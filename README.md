@@ -34,14 +34,9 @@ We will be very selective about what is added to Xephyr and what isn't; the proj
 
 Maven Dependency/Repository Information
 ==
-The repository where releases are published.
-
-	<repository>
-		<id>hauno-repo</id>
-		<url>http://repo.hauno.me/</url>
-	</repository>
+We haven't published any artifacts yet, but you can easily keep up to date and use Xephyr with maven by cloning this repository and then executing `mvn clean install` to install the project to your local repository.
 	
-and the dependency info.
+The dependency info:
 
 	<dependency>
 		<groupId>com.dhlab.xephyr</groupId>
