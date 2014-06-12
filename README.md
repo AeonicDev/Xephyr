@@ -44,3 +44,5 @@ The dependency info:
 		<version>1.0</version>
 		<scope>provided</scope>
 	</dependency>
+
+Change the version as needed.
