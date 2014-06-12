@@ -12,19 +12,21 @@ import org.bukkit.potion.PotionEffect;
 import java.util.Arrays;
 
 /**
- * A builder for a Bukkit itemstack, similar to GSON's GsonBuilder class.
+ * A builder for a Bukkit {@link org.bukkit.inventory.ItemStack}.
+ *
  * @author maladr0it
  */
 public class ItemStackBuilder implements Builder<ItemStack> {
 
     /**
-     * The itemstack being built.
+     * The item stack being built.
      */
     private ItemStack stack;
 
     /**
-     * Starts off with a 1-amount itemstack of Material "mat"
-     * @param mat the material to start with
+     * Starts off with a {@link org.bukkit.inventory.ItemStack} of the given {@link org.bukkit.Material}.
+     *
+     * @param mat The material to start with.
      */
     public ItemStackBuilder(Material mat) {
         Validate.notNull(mat);
@@ -32,8 +34,9 @@ public class ItemStackBuilder implements Builder<ItemStack> {
     }
 
     /**
-     * Starts off with a default ItemStack provided by the user.
-     * @param defaultStack
+     * Starts off with a default {@link org.bukkit.inventory.ItemStack} provided by the user.
+     *
+     * @param defaultStack The item stack to start from.
      */
     public ItemStackBuilder(ItemStack defaultStack) {
         Validate.notNull(defaultStack);
@@ -41,9 +44,10 @@ public class ItemStackBuilder implements Builder<ItemStack> {
     }
 
     /**
-     * Changes the amount of the itemstack being built.
-     * @param amount The amount to set of the itemstack. Must be > 0.
-     * @return
+     * Changes the amount of the item stack being built.
+     *
+     * @param amount The amount to set of the item stack. Must be > 0.
+     * @return The updated builder.
      */
     public ItemStackBuilder amount(int amount) {
         Validate.isTrue(amount > 0, "");
@@ -52,9 +56,10 @@ public class ItemStackBuilder implements Builder<ItemStack> {
     }
 
     /**
-     * Changes the name of the stack using the item meta
+     * Changes the name of the stack using the item meta.
+     *
      * @param name The name to give the stack.
-     * @return
+     * @return The updated builder.
      */
     public ItemStackBuilder name(String name) {
         Validate.notNull(name);
@@ -65,9 +70,10 @@ public class ItemStackBuilder implements Builder<ItemStack> {
     }
 
     /**
-     * Changes the List[String] values of the stack's item meta
+     * Changes the List[String] values of the stack's item meta.
+     *
      * @param lines The array of lines to set for the lore.
-     * @return
+     * @return The updated builder.
      */
     public ItemStackBuilder lore(String...lines) {
         Validate.notNull(lines);
@@ -81,9 +87,10 @@ public class ItemStackBuilder implements Builder<ItemStack> {
 
     /**
      * Adds a safe (or unsafe) enchant to the stack being built.
+     *
      * @param ench The enchantment to use.
      * @param level The level to set the enchantment.
-     * @return
+     * @return The updated builder.
      */
     public ItemStackBuilder enchant(Enchantment ench, int level) {
         Validate.notNull(ench);
@@ -98,8 +105,9 @@ public class ItemStackBuilder implements Builder<ItemStack> {
 
     /**
      * Modifies ItemStack meta on the fly using the MetaTransformer interface.
+     *
      * @param transform The "MetaTransformer" to use.
-     * @return The instance of this ItemStackBuilder.
+     * @return The updated builder.
      */
     public ItemStackBuilder meta(MetaTransformer transform) {
         Validate.notNull(transform);
@@ -115,10 +123,11 @@ public class ItemStackBuilder implements Builder<ItemStack> {
     }
 
     /**
-     * Adds a potion effect to the itemstack, but only if the itemstack is an instance of a Potion (i.e; has PotionMeta)
-     * If the item is not a potion, the function simply returns the itemstack builder.
+     * Adds a potion effect to the item stack, but only if the item stack is an instance of a Potion (i.e; has PotionMeta).
+     * If the item is not a potion, the function simply returns the item stack builder.
+     *
      * @param effect The effect to apply. Cannot be null.
-     * @return
+     * @return The updated builder.
      */
     public ItemStackBuilder potion(PotionEffect effect) {
         Validate.notNull(effect);
@@ -133,4 +142,5 @@ public class ItemStackBuilder implements Builder<ItemStack> {
     public ItemStack build() {
         return stack.clone();
     }
+
 }
