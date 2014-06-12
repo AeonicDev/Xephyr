@@ -39,7 +39,7 @@ We haven't published any artifacts yet, but you can easily keep up to date and u
 The dependency info:
 
 	<dependency>
-		<groupId>com.dhlab.xephyr</groupId>
+		<groupId>com.aeonicdev.xephyr</groupId>
 		<artifactId>Xephyr</artifactId>
 		<version>1.0</version>
 		<scope>provided</scope>
