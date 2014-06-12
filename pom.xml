@@ -4,10 +4,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.dhlab.xephyr</groupId>
+    <groupId>com.aeonicdev.xephyr</groupId>
     <artifactId>Xephyr</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <description>Plugin Engine API with a variety of utilities.</description>
+    <description>Bukkit plugin development framework.</description>
     
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -27,13 +27,14 @@
             <groupId>org.bukkit</groupId>
             <artifactId>craftbukkit</artifactId>
             <version>1.7.9-R0.1-SNAPSHOT</version>
-            <scope>compile</scope>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.30</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 
@@ -78,7 +79,6 @@
                         <configuration>
                             <artifactSet>
                                 <includes>
-                                    <include>org.jetlang:jetlang</include>
                                     <include>mysql:mysql-connector-java</include>
                                 </includes>
                             </artifactSet>
