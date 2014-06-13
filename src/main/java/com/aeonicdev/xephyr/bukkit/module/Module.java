@@ -3,13 +3,9 @@ package com.aeonicdev.xephyr.bukkit.module;
 import com.aeonicdev.xephyr.generic.Enableable;
 import com.aeonicdev.xephyr.generic.dependency.ClassDependent;
 import com.aeonicdev.xephyr.generic.dependency.DependencyNotSatisfiedException;
-import com.aeonicdev.xephyr.generic.settings.YAMLSettable;
 import org.apache.commons.lang.Validate;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,17 +14,12 @@ import java.util.Map;
  *
  * @author maladr0it
  */
-public abstract class Module implements ClassDependent<Module>, YAMLSettable, Enableable {
+public abstract class Module implements ClassDependent<Module>, Enableable {
 
     /**
      * Map of modules this one depends on.
      */
     protected final Map<Class<? extends Module>, Module> dependencies = new HashMap<>();
-
-    /**
-     * The configuration for this module.
-     */
-    protected YamlConfiguration config = new YamlConfiguration();
 
     /**
      * The plugin this module is associated with.
@@ -103,39 +94,4 @@ public abstract class Module implements ClassDependent<Module>, YAMLSettable, En
         dependencies.put(id, null);
     }
 
-    @Override
-    public YamlConfiguration getSettings() {
-        return config;
-    }
-
-    @Override
-    public File getFile() {
-        return new File(plugin.getDataFolder() + File.separator + "modules", getName() + ".yml");
-    }
-
-    @Override
-    public void loadSettings(File f) {
-        this.config = YamlConfiguration.loadConfiguration(f);
-        onSettingsLoad();
-    }
-
-    @Override
-    public void saveSettings(File f) {
-        try {
-            preSettingsSave();
-            this.config.save(f);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Called when this module's individual settings are loaded.
-     */
-    protected void onSettingsLoad() {}
-
-    /**
-     * Called right before this module's individual settings are saved.
-     */
-    protected void preSettingsSave() { }
 }

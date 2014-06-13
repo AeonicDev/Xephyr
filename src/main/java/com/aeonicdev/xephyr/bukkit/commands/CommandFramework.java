@@ -58,6 +58,7 @@ public class CommandFramework {
 
     /**
      * Creates a new {@code CommandFramework} instance for the specified plugin.
+     * This uses reflection to obtain the internal Bukkit {@link org.bukkit.command.CommandMap}.
      *
      * @param plugin The plugin using this command framework instance.
      */
@@ -81,6 +82,7 @@ public class CommandFramework {
         } catch (NoSuchFieldException e) {
             e.printStackTrace();
         }
+
         addRegistrator(new MethodBasedCommandRegistrator());
         addRegistrator(new WrapperBasedCommandRegistrator());
     }
