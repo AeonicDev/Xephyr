@@ -141,7 +141,7 @@ public class ModuleManager implements ClassBasedManager<Module>, Enableable {
                 Bukkit.getPluginManager().registerEvents((Listener)m, bootstrap.getPlugin());
             }
 
-            m.onEnable(); notify();
+            m.onEnable();
         }
     }
 
