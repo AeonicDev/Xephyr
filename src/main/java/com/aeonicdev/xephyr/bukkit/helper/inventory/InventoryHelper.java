@@ -1,5 +1,6 @@
-package com.aeonicdev.xephyr.bukkit.inventory;
+package com.aeonicdev.xephyr.bukkit.helper.inventory;
 
+import com.aeonicdev.xephyr.generic.helper.Helper;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
@@ -16,10 +17,9 @@ import java.util.Map;
  *
  * @author Essentials Team
  */
-public final class XephyrInventoryWorkaround {
-    private XephyrInventoryWorkaround() {}
+public final class InventoryHelper implements Helper {
 
-    private static int firstPartial(final Inventory inventory, final ItemStack item, final int maxAmount) {
+    private int firstPartial(final Inventory inventory, final ItemStack item, final int maxAmount) {
         if (item == null) {
             return -1;
         }
@@ -35,7 +35,7 @@ public final class XephyrInventoryWorkaround {
 
     // Returns what it couldnt store
     // This will will abort if it couldn't store all items
-    public static Map<Integer, ItemStack> addAllItems(final Inventory inventory, final ItemStack... items) {
+    public  Map<Integer, ItemStack> addAllItems(final Inventory inventory, final ItemStack... items) {
         final Inventory fakeInventory = Bukkit.getServer().createInventory(null, inventory.getType());
         fakeInventory.setContents(inventory.getContents());
         Map<Integer, ItemStack> overFlow = addItems(fakeInventory, items);
@@ -47,13 +47,13 @@ public final class XephyrInventoryWorkaround {
     }
 
     // Returns what it couldnt store
-    public static Map<Integer, ItemStack> addItems(final Inventory inventory, final ItemStack... items) {
+    public  Map<Integer, ItemStack> addItems(final Inventory inventory, final ItemStack... items) {
         return addOversizedItems(inventory, 0, items);
     }
 
     // Returns what it couldnt store
     // Set oversizedStack to below normal stack size to disable oversized stacks
-    public static Map<Integer, ItemStack> addOversizedItems(final Inventory inventory, final int oversizedStacks, final ItemStack... items) {
+    public  Map<Integer, ItemStack> addOversizedItems(final Inventory inventory, final int oversizedStacks, final ItemStack... items) {
         final Map<Integer, ItemStack> leftover = new HashMap<Integer, ItemStack>();
 
 		/*
@@ -136,7 +136,7 @@ public final class XephyrInventoryWorkaround {
         return leftover;
     }
 
-    public static boolean hasSpace(final Inventory inventory, ItemStack... items) {
+    public  boolean hasSpace(final Inventory inventory, ItemStack... items) {
         final Map<Integer, ItemStack> leftover = new HashMap<Integer, ItemStack>();
         int oversizedStacks = 0;
 		/*

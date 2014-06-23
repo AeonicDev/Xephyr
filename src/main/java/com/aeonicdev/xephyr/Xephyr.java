@@ -1,6 +1,8 @@
 package com.aeonicdev.xephyr;
 
+import com.aeonicdev.xephyr.bukkit.helper.inventory.InventoryHelper;
 import com.aeonicdev.xephyr.bukkit.plugin.PluginBootstrapper;
+import com.aeonicdev.xephyr.generic.helper.HelperRegistry;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
@@ -19,7 +21,7 @@ public class Xephyr extends PluginBootstrapper {
 
     @Override
     public void onEnable() {
-
+        HelperRegistry.INSTANCE.add(new InventoryHelper());
     }
 
     @Override

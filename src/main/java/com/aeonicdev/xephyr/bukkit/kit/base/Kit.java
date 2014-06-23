@@ -1,12 +1,13 @@
 package com.aeonicdev.xephyr.bukkit.kit.base;
 
-import com.aeonicdev.xephyr.bukkit.inventory.XephyrInventoryWorkaround;
+import com.aeonicdev.xephyr.bukkit.helper.inventory.InventoryHelper;
 import com.aeonicdev.xephyr.bukkit.kit.base.config.KitConfig;
 import com.aeonicdev.xephyr.bukkit.kit.base.listen.FluidKitListener;
 import com.aeonicdev.xephyr.bukkit.kit.base.listen.KitStateListener;
 import com.aeonicdev.xephyr.bukkit.kit.base.listen.SolidKitListener;
 import com.aeonicdev.xephyr.bukkit.utilities.MinecraftConstants;
 import com.aeonicdev.xephyr.generic.Enableable;
+import com.aeonicdev.xephyr.generic.helper.HelperRegistry;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -334,8 +335,8 @@ public class Kit implements Enableable {
         }
         for (Map.Entry<Integer, ItemStack> entry : this.items.entrySet()) {
             if (inv.getItem(entry.getKey()) != null && !clearInv) {
-                if (XephyrInventoryWorkaround.hasSpace(inv, entry.getValue())) {
-                    XephyrInventoryWorkaround.addAllItems(inv, entry.getValue());
+                if (HelperRegistry.INSTANCE.get(InventoryHelper.class).hasSpace(inv, entry.getValue())) {
+                    HelperRegistry.INSTANCE.get(InventoryHelper.class).addAllItems(inv, entry.getValue());
                 }
             } else {
                 player.getInventory().setItem(entry.getKey(), entry.getValue());

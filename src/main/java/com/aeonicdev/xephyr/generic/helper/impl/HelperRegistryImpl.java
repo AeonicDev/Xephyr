@@ -14,6 +14,9 @@ import java.util.Map;
  */
 public final class HelperRegistryImpl implements HelperRegistry {
 
+    /**
+     * The map of class -> helper.
+     */
     protected final Map<Class<? extends Helper>, Helper> helpers = new HashMap<>();
 
     private HelperRegistryImpl() { }
@@ -38,6 +41,9 @@ public final class HelperRegistryImpl implements HelperRegistry {
         return (T)helpers.get(klass);
     }
 
+    /**
+     * The static instance of the HelperRegistry implementation.
+     */
     private static final HelperRegistryImpl instance = new HelperRegistryImpl();
     public static final HelperRegistryImpl get() { return instance; }
 }
