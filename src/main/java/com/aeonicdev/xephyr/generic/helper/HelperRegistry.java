@@ -1,11 +1,11 @@
 package com.aeonicdev.xephyr.generic.helper;
 
-import dev.aeonic.seraphim.api.generics.general.Initializable;
+import com.aeonicdev.xephyr.generic.helper.impl.HelperRegistryImpl;
 
 /**
  * @author sc4re
  */
-public interface HelperRegistry extends Initializable {
+public interface HelperRegistry {
     /**
      * Adds a helper to the registry.
      * @param helper The helper to add.
@@ -26,4 +26,7 @@ public interface HelperRegistry extends Initializable {
      * @return A helper.
      */
     public <T extends Helper> T get(Class<T> klass);
+
+
+    public static final HelperRegistry INSTANCE = HelperRegistryImpl.get();
 }

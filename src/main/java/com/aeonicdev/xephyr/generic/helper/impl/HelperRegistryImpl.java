@@ -1,24 +1,9 @@
 package com.aeonicdev.xephyr.generic.helper.impl;
 
-import dev.aeonic.seraphim.api.HackedClient;
-import dev.aeonic.seraphim.api.helper.Helper;
-import dev.aeonic.seraphim.api.helper.HelperRegistry;
-import dev.aeonic.seraphim.api.helper.impl.java.RandomHelper;
-import dev.aeonic.seraphim.api.helper.impl.java.RegexHelper;
-import dev.aeonic.seraphim.api.helper.impl.misc.*;
-import dev.aeonic.seraphim.api.helper.impl.network.NetworkHelper;
-import dev.aeonic.seraphim.api.helper.impl.player.InventoryHelper;
-import dev.aeonic.seraphim.api.helper.impl.player.PlayerHelper;
-import dev.aeonic.seraphim.api.helper.impl.player.PositionHelper;
-import dev.aeonic.seraphim.api.helper.impl.player.RotationHelper;
-import dev.aeonic.seraphim.api.helper.impl.reflection.minecraft.SessionHelper;
-import dev.aeonic.seraphim.api.helper.impl.reflection.minecraft.TimerHelper;
-import dev.aeonic.seraphim.api.helper.impl.reflection.packet.handshake.ProtocolVersionHelper;
-import dev.aeonic.seraphim.api.helper.impl.render.ColorHelper;
-import dev.aeonic.seraphim.api.helper.impl.render.Render2DHelper;
-import dev.aeonic.seraphim.api.helper.impl.render.Render3DHelper;
-import dev.aeonic.seraphim.api.helper.impl.world.WorldHelper;
-import org.apache.commons.lang3.Validate;
+
+import com.aeonicdev.xephyr.generic.helper.Helper;
+import com.aeonicdev.xephyr.generic.helper.HelperRegistry;
+import net.minecraft.util.org.apache.commons.lang3.Validate;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,12 +15,8 @@ import java.util.Map;
 public final class HelperRegistryImpl implements HelperRegistry {
 
     protected final Map<Class<? extends Helper>, Helper> helpers = new HashMap<>();
-    protected final HackedClient client;
 
-    public HelperRegistryImpl(HackedClient client) {
-        Validate.notNull(client);
-        this.client = client;
-    }
+    private HelperRegistryImpl() { }
 
     @Override
     public <T extends Helper> void add(T helper) {
@@ -57,25 +38,6 @@ public final class HelperRegistryImpl implements HelperRegistry {
         return (T)helpers.get(klass);
     }
 
-    @Override
-    public void initialize() {
-        add(new BoundingBoxHelper());
-        add(new ChatHelper());
-        add(new ColorHelper());
-        add(new FontHelper());
-        add(new InventoryHelper());
-        add(new MinecraftHelper());
-        add(new NetworkHelper());
-        add(new PlayerHelper());
-        add(new PositionHelper());
-        add(new ProtocolVersionHelper());
-        add(new RandomHelper());
-        add(new RegexHelper());
-        add(new Render2DHelper());
-        add(new Render3DHelper());
-        add(new RotationHelper());
-        add(new SessionHelper());
-        add(new TimerHelper());
-        add(new WorldHelper());
-    }
+    private static final HelperRegistryImpl instance = new HelperRegistryImpl();
+    public static final HelperRegistryImpl get() { return instance; }
 }
