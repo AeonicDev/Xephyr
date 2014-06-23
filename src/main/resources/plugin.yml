@@ -1,5 +1,5 @@
 name: ${project.name}
-main: com.dhlab.xephyr.plugin.XephyrPlugin
+main: com.aeonicdev.xephyr.XephyrPlugin
 version: ${project.version}
 description: ${project.description}
 authors: [maladr0it, hauno]
