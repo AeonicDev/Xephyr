@@ -7,7 +7,7 @@
     <name>Xephyr</name>
     <groupId>com.aeonicdev.xephyr</groupId>
     <artifactId>xephyr</artifactId>
-    <version>1.0</version>
+    <version>1.1-SNAPSHOT</version>
     <description>Bukkit plugin development framework.</description>
     
     <properties>
