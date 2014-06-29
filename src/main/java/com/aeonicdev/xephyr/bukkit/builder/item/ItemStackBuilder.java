@@ -14,7 +14,7 @@ import java.util.Arrays;
 /**
  * A builder for a Bukkit {@link org.bukkit.inventory.ItemStack}.
  *
- * @author maladr0it
+ * @author sc4re
  */
 public class ItemStackBuilder implements Builder<ItemStack> {
 

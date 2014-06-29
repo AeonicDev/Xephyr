@@ -9,7 +9,7 @@ import com.aeonicdev.xephyr.bukkit.commands.registration.context.WrapperRegistra
 /**
  * Registrator for {@link com.aeonicdev.xephyr.bukkit.commands.registration.wrapper.CommandWrapper} objects.
  *
- * @author maladr0it
+ * @author sc4re
  */
 public class WrapperBasedCommandRegistrator implements CommandRegistrator<WrapperRegistrationContext> {
 

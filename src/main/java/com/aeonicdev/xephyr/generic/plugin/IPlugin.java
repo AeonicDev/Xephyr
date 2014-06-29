@@ -3,7 +3,7 @@ package com.aeonicdev.xephyr.generic.plugin;
 /**
  * The basic interface describing the barest of APIs for a plugin to have.
  * @param <T> The "pluginable" interface for this class to be a plugin for.
- * @author maladr0it
+ * @author sc4re
  */
 public interface IPlugin<T extends IPluginable> {
     /**

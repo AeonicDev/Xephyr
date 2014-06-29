@@ -9,7 +9,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * An implementation of a Helper Registry.
+ * An implementation of a {@link com.aeonicdev.xephyr.generic.helper.HelperRegistry}.
+ *
  * @author sc4re
  */
 public final class HelperRegistryImpl implements HelperRegistry {
@@ -45,5 +46,12 @@ public final class HelperRegistryImpl implements HelperRegistry {
      * The static instance of the HelperRegistry implementation.
      */
     private static final HelperRegistryImpl instance = new HelperRegistryImpl();
+
+    /**
+     * Gets the singleton instance of the registry.
+     *
+     * @return The helper registry instance.
+     */
     public static final HelperRegistryImpl get() { return instance; }
+
 }

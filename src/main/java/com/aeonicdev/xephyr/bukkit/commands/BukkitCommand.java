@@ -8,7 +8,7 @@ import org.bukkit.plugin.Plugin;
 /**
  * The plugin command required to inject commands into the CommandMap.
  *
- * @author maladr0it
+ * @author sc4re
  */
 public class BukkitCommand extends Command {
 

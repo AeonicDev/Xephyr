@@ -14,7 +14,7 @@ import java.util.Map;
 /**
  * Basic module class. Has methods for handling dependencies.
  *
- * @author maladr0it
+ * @author sc4re
  */
 public abstract class Module implements ClassDependent<Module>, Enableable {
 

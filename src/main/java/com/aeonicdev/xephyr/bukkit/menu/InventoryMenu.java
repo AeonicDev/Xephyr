@@ -19,7 +19,7 @@ import java.util.*;
 /**
  * Basic inventory menu API class.
  *
- * @author maladr0it
+ * @author sc4re
  */
 public class InventoryMenu implements FormattingNamed, Sizeable, Listener {
 

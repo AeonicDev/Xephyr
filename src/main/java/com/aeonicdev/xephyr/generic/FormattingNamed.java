@@ -3,7 +3,7 @@ package com.aeonicdev.xephyr.generic;
 /**
  * An interface describing an object that can have a formatted and unformatted name.
  *
- * @author maladr0it
+ * @author sc4re
  */
 public interface FormattingNamed extends Named {
 

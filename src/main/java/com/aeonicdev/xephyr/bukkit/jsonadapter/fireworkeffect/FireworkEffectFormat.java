@@ -6,7 +6,7 @@ import org.bukkit.FireworkEffect;
 /**
  * All of the required data to serialize and deserialize Firework Effects.
  *
- * @author maladr0it
+ * @author sc4re
  */
 public final class FireworkEffectFormat {
 

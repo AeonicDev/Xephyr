@@ -14,7 +14,7 @@ import java.util.*;
 /**
  * Module manager implementation.
  *
- * @author maladr0it
+ * @author sc4re
  */
 public class ModuleManager implements ClassBasedManager<Module>, Enableable {
 

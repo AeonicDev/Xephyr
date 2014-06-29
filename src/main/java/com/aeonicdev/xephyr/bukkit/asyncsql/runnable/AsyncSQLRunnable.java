@@ -15,7 +15,7 @@ import java.sql.SQLException;
  * The SQL runnable that the AsyncSQL instance uses.
  * Wrapped in a {@link org.bukkit.scheduler.BukkitRunnable} for consistency.
  *
- * @author maladr0it
+ * @author sc4re
  */
 public class AsyncSQLRunnable extends BukkitRunnable {
 

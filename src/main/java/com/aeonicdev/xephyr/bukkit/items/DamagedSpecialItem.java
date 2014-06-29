@@ -7,7 +7,7 @@ import org.bukkit.inventory.ItemStack;
  * A SpecialItem that takes in a short as an argument to represent
  * the durability of the item.
  *
- * @author maladr0it
+ * @author sc4re
  */
 public class DamagedSpecialItem extends SpecialItem {
 

@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Slot class for use with {@link com.aeonicdev.xephyr.bukkit.menu.InventoryMenu}.
  *
- * @author maladr0it
+ * @author sc4re
  */
 public class Slot implements SlotAction {
 

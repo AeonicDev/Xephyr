@@ -5,7 +5,7 @@ import org.bukkit.entity.Player;
 /**
  * An interface describing what needs to happen when a slot is clicked.
  *
- * @author maladr0it
+ * @author sc4re
  */
 public interface SlotAction {
 

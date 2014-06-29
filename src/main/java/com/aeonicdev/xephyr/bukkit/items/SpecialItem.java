@@ -18,7 +18,7 @@ import java.util.List;
  * the items. Sadly, damage values no longer work because the Bukkit team removed the ability to
  * put damage values on non-damageable items.
  *
- * @author maladr0it
+ * @author sc4re
  */
 public class SpecialItem implements Listener,FormattingNameable {
 

@@ -12,7 +12,7 @@ import java.lang.reflect.Method;
 /**
  * Registers methods on an object with the @Command annotation.
  *
- * @author maladr0it
+ * @author sc4re
  */
 public class MethodBasedCommandRegistrator implements CommandRegistrator<MethodRegistrationContext> {
 

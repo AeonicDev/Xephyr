@@ -3,7 +3,7 @@ package com.aeonicdev.xephyr.bukkit.utilities;
 /**
  * A static class containing various Minecraft constants, currently mostly dealing with inventory bounds and
  * other limits on players.
- * @author maladr0it
+ * @author sc4re
  */
 public final class MinecraftConstants {
     /**

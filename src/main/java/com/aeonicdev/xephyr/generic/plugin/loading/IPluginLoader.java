@@ -7,7 +7,7 @@ import com.aeonicdev.xephyr.generic.plugin.IPluginable;
 /**
  * A context-specific plugin loader API that accepts a specific plugin type and
  * load context. These can be registered in the IPluginable interface.
- * @author maladr0it
+ * @author sc4re
  */
 public interface IPluginLoader<T extends IPlugin, K extends IPluginLoadContext> {
 

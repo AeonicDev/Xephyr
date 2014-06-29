@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Basic CommandWrapper for dynamic (non-annotated) commands.
  *
- * @author maladr0it
+ * @author sc4re
  */
 public abstract class CommandWrapper implements ICommandExecutor {
 

@@ -8,7 +8,7 @@ import java.sql.SQLException;
  * Defines the API for any object that wishes to wrap a {@link java.sql.PreparedStatement}
  * in a different format than is usually used.
  *
- * @author maladr0it
+ * @author sc4re
  */
 public interface SQLStatementWrapper {
 

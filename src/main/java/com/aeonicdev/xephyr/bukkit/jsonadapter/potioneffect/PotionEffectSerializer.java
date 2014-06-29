@@ -12,7 +12,7 @@ import java.lang.reflect.Type;
 /**
  * Serializes PotionEffects into JSON strings.
  *
- * @author maladr0it
+ * @author sc4re
  */
 public final class PotionEffectSerializer implements JsonSerializer<PotionEffect> {
 

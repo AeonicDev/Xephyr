@@ -1,21 +1,23 @@
-package com.aeonicdev.xephyr.bukkit.builder.minecraft.text;
+package com.aeonicdev.xephyr.bukkit.builder.text;
 
 import com.aeonicdev.xephyr.generic.builder.Builder;
 import org.bukkit.ChatColor;
 
 /**
  * Supports easy and fast Minecraft "Colored Text" building.
+ *
  * @author sc4re
  */
 public class MinecraftTextBuilder implements Builder<String> {
 
     /**
-     * The base stringbuilder used by this text builder.
+     * The base {@link java.lang.StringBuilder} used by this text builder.
      */
     private StringBuilder base = new StringBuilder();
 
     /**
      * Appends a raw string to the internally built string.
+     *
      * @param s The string to append.
      * @return The builder instance.
      */
@@ -26,6 +28,7 @@ public class MinecraftTextBuilder implements Builder<String> {
 
     /**
      * Appends the black color code to the internally built string.
+     *
      * @return The builder instance.
      */
     public MinecraftTextBuilder black()  {
@@ -34,6 +37,7 @@ public class MinecraftTextBuilder implements Builder<String> {
 
     /**
      * Appends the dark blue color code to the internally built string.
+     *
      * @return The builder instance.
      */
     public MinecraftTextBuilder darkBlue() {
@@ -42,6 +46,7 @@ public class MinecraftTextBuilder implements Builder<String> {
 
     /**
      * Appends the dark green color code to the internally built string.
+     *
      * @return The builder instance.
      */
     public MinecraftTextBuilder darkGreen() {
@@ -50,6 +55,7 @@ public class MinecraftTextBuilder implements Builder<String> {
 
     /**
      * Appends the dark aqua color code to the internally built string.
+     *
      * @return The builder instance.
      */
     public MinecraftTextBuilder darkAqua() {
@@ -58,6 +64,7 @@ public class MinecraftTextBuilder implements Builder<String> {
 
     /**
      * Appends the dark red color code to the internally built string.
+     *
      * @return The builder instance.
      */
     public MinecraftTextBuilder darkRed() {
@@ -66,6 +73,7 @@ public class MinecraftTextBuilder implements Builder<String> {
 
     /**
      * Appends the dark purple color code to the internally built string.
+     *
      * @return The builder instance.
      */
     public MinecraftTextBuilder darkPurple() {
@@ -74,6 +82,7 @@ public class MinecraftTextBuilder implements Builder<String> {
 
     /**
      * Appends the gold color code to the internally built string.
+     *
      * @return The builder instance.
      */
     public MinecraftTextBuilder gold() {
@@ -82,6 +91,7 @@ public class MinecraftTextBuilder implements Builder<String> {
 
     /**
      * Appends the gray color code to the internally built string.
+     *
      * @return The builder instance.
      */
     public MinecraftTextBuilder gray() {
@@ -90,6 +100,7 @@ public class MinecraftTextBuilder implements Builder<String> {
 
     /**
      * Appends the dark gray color code to the internally built string.
+     *
      * @return The builder instance.
      */
     public MinecraftTextBuilder darkGray() {
@@ -98,6 +109,7 @@ public class MinecraftTextBuilder implements Builder<String> {
 
     /**
      * Appends the blue color code to the internally built string.
+     *
      * @return The builder instance.
      */
     public MinecraftTextBuilder blue() {
@@ -106,6 +118,7 @@ public class MinecraftTextBuilder implements Builder<String> {
 
     /**
      * Appends the green color code to the internally built string.
+     *
      * @return The builder instance.
      */
     public MinecraftTextBuilder green() {
@@ -114,6 +127,7 @@ public class MinecraftTextBuilder implements Builder<String> {
 
     /**
      * Appends the aqua color code to the internally built string.
+     *
      * @return The builder instance.
      */
     public MinecraftTextBuilder aqua() {
@@ -122,6 +136,7 @@ public class MinecraftTextBuilder implements Builder<String> {
 
     /**
      * Appends the red color code to the internally built string.
+     *
      * @return The builder instance.
      */
     public MinecraftTextBuilder red(){
@@ -130,6 +145,7 @@ public class MinecraftTextBuilder implements Builder<String> {
 
     /**
      * Appends the yellow color code to the internally built string.
+     *
      * @return The builder instance.
      */
     public MinecraftTextBuilder yellow() {
@@ -138,6 +154,7 @@ public class MinecraftTextBuilder implements Builder<String> {
 
     /**
      * Appends the white color code to the internally built string.
+     *
      * @return The builder instance.
      */
     public MinecraftTextBuilder white() {
@@ -146,6 +163,7 @@ public class MinecraftTextBuilder implements Builder<String> {
 
     /**
      * Appends the magic color code to the internally built string.
+     *
      * @return The builder instance.
      */
     public MinecraftTextBuilder magic() {
@@ -162,6 +180,7 @@ public class MinecraftTextBuilder implements Builder<String> {
 
     /**
      * Appends the strikethrough color code to the internally built string.
+     *
      * @return The builder instance.
      */
     public MinecraftTextBuilder strikethrough() {
@@ -170,6 +189,7 @@ public class MinecraftTextBuilder implements Builder<String> {
 
     /**
      * Appends the underline color code to the internally built string.
+     *
      * @return The builder instance.
      */
     public MinecraftTextBuilder underline() {
@@ -178,6 +198,7 @@ public class MinecraftTextBuilder implements Builder<String> {
 
     /**
      * Appends the italic color code to the internally built string.
+     *
      * @return The builder instance.
      */
     public MinecraftTextBuilder italic() {
@@ -186,6 +207,7 @@ public class MinecraftTextBuilder implements Builder<String> {
 
     /**
      * Appends the reset color code to the internally built string.
+     *
      * @return The builder instance.
      */
     public MinecraftTextBuilder reset() {
@@ -196,4 +218,5 @@ public class MinecraftTextBuilder implements Builder<String> {
     public String build() {
         return this.base.toString();
     }
+
 }

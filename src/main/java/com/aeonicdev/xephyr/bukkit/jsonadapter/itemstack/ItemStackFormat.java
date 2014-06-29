@@ -3,7 +3,7 @@ package com.aeonicdev.xephyr.bukkit.jsonadapter.itemstack;
 /**
  * All of the required Strings to serialize and deserialize ItemStacks.
  *
- * @author maladr0it
+ * @author sc4re
  */
 public final class ItemStackFormat {
 

@@ -16,7 +16,7 @@ import java.util.*;
 /**
  * Deserializes ItemStacks from JSON strings.
  *
- * @author maladr0it
+ * @author sc4re
  */
 public final class ItemStackDeserializer implements JsonDeserializer<ItemStack> {
 

@@ -14,6 +14,7 @@ import java.util.Map;
  * I included a copy of the GPLv3, I'm 100% sure it's compatible with the BSD 3-clause license I use.
  * Original class here: https://github.com/essentials/Essentials/blob/2.x/Essentials/src/com/earth2me/essentials/craftbukkit/InventoryWorkaround.java
  * Class renamed due to not wanting classloader conflicts when this plugin and essentials are loaded together
+ * The utilities found in the class were converted to use Xephyr's helper system.
  *
  * @author Essentials Team
  */

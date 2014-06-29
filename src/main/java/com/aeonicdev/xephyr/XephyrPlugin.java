@@ -4,7 +4,7 @@ import com.aeonicdev.xephyr.bukkit.plugin.EnginePlugin;
 
 /**
  * Main Plugin class for Xephyr
- * @author maladr0it
+ * @author sc4re
  */
 public class XephyrPlugin extends EnginePlugin {
     @Override

@@ -19,7 +19,7 @@ import java.util.Map;
 /**
  * A serialization class to turn ItemStacks into JSON elements using Gson.
  *
- * @author maladr0it
+ * @author sc4re
  */
 public final class ItemStackSerializer implements JsonSerializer<ItemStack> {
 

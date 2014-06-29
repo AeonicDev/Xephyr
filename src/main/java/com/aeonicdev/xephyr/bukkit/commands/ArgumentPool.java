@@ -3,7 +3,7 @@ package com.aeonicdev.xephyr.bukkit.commands;
 /**
  * An argument holder with the ability to cast / parse the arguments into various other objects.
  *
- * @author maladr0it
+ * @author sc4re
  */
 public class ArgumentPool {
 

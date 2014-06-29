@@ -10,7 +10,7 @@ import java.lang.reflect.Type;
 /**
  * Serializes FireworkEffects.
  *
- * @author maladr0it
+ * @author sc4re
  */
 public final class FireworkEffectSerializer implements JsonSerializer<FireworkEffect> {
 

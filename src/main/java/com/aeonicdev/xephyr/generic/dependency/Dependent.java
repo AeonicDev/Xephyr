@@ -4,7 +4,7 @@ package com.aeonicdev.xephyr.generic.dependency;
  * Defines an API for objects that depend on other objects, such as Modules.
  * T is the object type that is identified by K.
  *
- * @author maladr0it
+ * @author sc4re
  */
 public interface Dependent<T, K> {
 

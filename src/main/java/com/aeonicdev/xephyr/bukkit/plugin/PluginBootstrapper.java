@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 /**
  * A bootstrapper for setting up modules, commands, and other things.
  *
- * @author maladr0it
+ * @author sc4re
  * @see com.aeonicdev.xephyr.generic.Enableable
  */
 public abstract class PluginBootstrapper implements Enableable {

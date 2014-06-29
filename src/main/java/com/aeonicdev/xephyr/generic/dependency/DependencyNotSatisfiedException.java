@@ -3,7 +3,7 @@ package com.aeonicdev.xephyr.generic.dependency;
 /**
  * Thrown when a dependency is not satisfied by method call.
  *
- * @author maladr0it
+ * @author sc4re
  */
 public class DependencyNotSatisfiedException extends Exception {
 

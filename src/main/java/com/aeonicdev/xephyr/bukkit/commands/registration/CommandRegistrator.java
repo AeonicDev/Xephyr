@@ -7,7 +7,7 @@ import com.aeonicdev.xephyr.bukkit.commands.CommandFramework;
  * It takes a type argument of a {@link com.aeonicdev.xephyr.bukkit.commands.registration.CommandRegistrationContext},
  * so that it can be passed that type of context when the {@code CommandRegistrator} commands are registered.
  *
- * @author maladr0it
+ * @author sc4re
  */
 public interface CommandRegistrator<T extends CommandRegistrationContext> {
 

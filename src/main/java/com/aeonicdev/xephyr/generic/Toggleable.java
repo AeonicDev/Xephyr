@@ -3,7 +3,7 @@ package com.aeonicdev.xephyr.generic;
 /**
  * Toggleable interface (usually for modules and the like).
  *
- * @author maladr0it
+ * @author sc4re
  */
 public interface Toggleable extends Enableable {
 

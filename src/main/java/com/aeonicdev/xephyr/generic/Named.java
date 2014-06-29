@@ -3,7 +3,7 @@ package com.aeonicdev.xephyr.generic;
 /**
  * Allows objects to have names.
  *
- * @author maladr0it
+ * @author sc4re
  */
 public interface Named {
 

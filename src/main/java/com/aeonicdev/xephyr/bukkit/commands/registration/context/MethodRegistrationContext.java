@@ -7,7 +7,7 @@ import com.aeonicdev.xephyr.bukkit.commands.registration.method.MethodBasedComma
  * A registration context that describes an annotation (method-based) command, and allows you to register commands using
  * that context.
  *
- * @author maladr0it
+ * @author sc4re
  */
 public class MethodRegistrationContext implements CommandRegistrationContext<MethodBasedCommandRegistrator> {
 

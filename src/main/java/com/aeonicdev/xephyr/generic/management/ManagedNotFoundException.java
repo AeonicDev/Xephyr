@@ -3,7 +3,7 @@ package com.aeonicdev.xephyr.generic.management;
 /**
  * To be thrown when a Manager child fails to find an internal object.
  *
- * @author maladr0it
+ * @author sc4re
  */
 public class ManagedNotFoundException extends Exception {
 

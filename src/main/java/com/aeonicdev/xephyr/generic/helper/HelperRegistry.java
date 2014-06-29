@@ -3,9 +3,12 @@ package com.aeonicdev.xephyr.generic.helper;
 import com.aeonicdev.xephyr.generic.helper.impl.HelperRegistryImpl;
 
 /**
+ * Defines the API for helper registries.
+ *
  * @author sc4re
  */
 public interface HelperRegistry {
+
     /**
      * Adds a helper to the registry.
      * @param helper The helper to add.
@@ -27,6 +30,6 @@ public interface HelperRegistry {
      */
     public <T extends Helper> T get(Class<T> klass);
 
-
     public static final HelperRegistry INSTANCE = HelperRegistryImpl.get();
+
 }

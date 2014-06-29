@@ -3,7 +3,7 @@ package com.aeonicdev.xephyr.bukkit.commands.registration;
 /**
  * Thrown when a command fails to register.
  *
- * @author maladr0it
+ * @author sc4re
  */
 public class CommandRegistrationException extends Exception {
 

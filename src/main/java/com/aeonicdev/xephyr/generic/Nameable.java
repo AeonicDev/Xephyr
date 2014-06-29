@@ -3,7 +3,7 @@ package com.aeonicdev.xephyr.generic;
 /**
  * Allows a named object to have its name changed.
  *
- * @author maladr0it
+ * @author sc4re
  */
 public interface Nameable extends Named {
 

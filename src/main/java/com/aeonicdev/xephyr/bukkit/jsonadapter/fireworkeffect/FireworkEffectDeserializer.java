@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Deserializes JSON strings into a FireworkEffect.
  *
- * @author maladr0it
+ * @author sc4re
  */
 public final class FireworkEffectDeserializer implements JsonDeserializer<FireworkEffect> {
 

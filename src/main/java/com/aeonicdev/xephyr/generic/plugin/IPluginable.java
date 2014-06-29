@@ -6,7 +6,7 @@ import com.aeonicdev.xephyr.generic.plugin.loading.IPluginLoader;
 
 /**
  * An interface describing an object that can have plugins added to it.
- * @author maladr0it
+ * @author sc4re
  */
 public interface IPluginable<T extends IPlugin> {
     /**

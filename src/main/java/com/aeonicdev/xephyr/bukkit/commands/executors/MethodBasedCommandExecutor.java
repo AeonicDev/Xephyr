@@ -12,7 +12,7 @@ import java.lang.reflect.Method;
 /**
  * A command executor that can be used with specific methods that use the @Command interface.
  *
- * @author maladr0it
+ * @author sc4re
  * @see com.aeonicdev.xephyr.bukkit.commands.registration.method.Command
  */
 public class MethodBasedCommandExecutor implements ICommandExecutor {

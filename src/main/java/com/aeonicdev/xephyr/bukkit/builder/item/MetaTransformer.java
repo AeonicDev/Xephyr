@@ -5,7 +5,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 /**
  * Modifies metadata for ItemStacks on the fly.
  *
- * @author maladr0it
+ * @author sc4re
  */
 public interface MetaTransformer {
 

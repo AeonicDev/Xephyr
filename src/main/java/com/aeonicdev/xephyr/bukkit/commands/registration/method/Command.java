@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
  * Provides access to setting aliases, command names, permissions, messages
  * for when players do not have correct permissions, and descriptions.
  *
- * @author maladr0it
+ * @author sc4re
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)

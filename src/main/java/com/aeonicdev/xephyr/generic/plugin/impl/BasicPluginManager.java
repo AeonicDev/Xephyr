@@ -11,7 +11,7 @@ import java.util.Map;
 
 /**
  * Barebones implementation of a plugin manager.
- * @author maladr0it
+ * @author sc4re
  */
 public class BasicPluginManager<T extends IPlugin<?>> implements IPluginable<T> {
 

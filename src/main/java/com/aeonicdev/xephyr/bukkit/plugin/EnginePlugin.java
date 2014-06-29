@@ -6,7 +6,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 /**
  * The base plugin class that all Xephyr plugins must extend.
- * @author maladr0it
+ * @author sc4re
  */
 public abstract class EnginePlugin extends JavaPlugin {
 

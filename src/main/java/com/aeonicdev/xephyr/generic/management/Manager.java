@@ -3,7 +3,7 @@ package com.aeonicdev.xephyr.generic.management;
 /**
  * A generic manager class used for a variety of things.
  *
- * @author maladr0it
+ * @author sc4re
  */
 public interface Manager<T, K> {
 

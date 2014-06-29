@@ -23,7 +23,7 @@ import java.util.regex.Pattern;
  * Automatically registers your commands for this plugin with the
  * SimplePluginManager command framework within Bukkit.
  *
- * @author maladr0it
+ * @author sc4re
  */
 public class CommandFramework {
 

@@ -3,7 +3,7 @@ package com.aeonicdev.xephyr.bukkit.jsonadapter.potioneffect;
 /**
  * All of the required fields to serialize and deserialize Potion Effects.
  *
- * @author maladr0it
+ * @author sc4re
  */
 public class PotionEffectFormat {
 

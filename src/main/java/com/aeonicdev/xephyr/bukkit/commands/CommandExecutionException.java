@@ -3,7 +3,7 @@ package com.aeonicdev.xephyr.bukkit.commands;
 /**
  * To be thrown when an XCommandExecutor fails to execute, or by the methods themselves that fail.
  *
- * @author maladr0it
+ * @author sc4re
  */
 public class CommandExecutionException extends Exception {
 

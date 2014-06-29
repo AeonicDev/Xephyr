@@ -9,7 +9,7 @@ import java.io.FileFilter;
 
 /**
  * A context that loads all of the jar files from a directory.
- * @author maladr0it
+ * @author sc4re
  */
 public class PluginDirectoryLoadContext implements IPluginLoadContext {
     /**

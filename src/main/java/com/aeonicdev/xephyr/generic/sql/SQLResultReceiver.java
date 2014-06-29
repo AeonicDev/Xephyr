@@ -6,7 +6,7 @@ import java.sql.ResultSet;
  * Defines the API for any object that wishes to recieve the results of
  * an SQL query from a Statement object.
  *
- * @author maladr0it
+ * @author sc4re
  */
 public interface SQLResultReceiver {
 

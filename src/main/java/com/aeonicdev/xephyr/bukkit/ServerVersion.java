@@ -5,7 +5,7 @@ import org.bukkit.Bukkit;
 /**
  * A small class used to get the vanilla version.
  *
- * @author maladr0it
+ * @author sc4re
  */
 public final class ServerVersion {
 

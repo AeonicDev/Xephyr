@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 /**
  * The arguments that are passed to every onCommand method.
  *
- * @author maladr0it
+ * @author sc4re
  */
 public class CommandArgs {
 

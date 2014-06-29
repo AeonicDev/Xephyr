@@ -7,7 +7,7 @@ import com.aeonicdev.xephyr.bukkit.commands.registration.wrapper.WrapperBasedCom
 /**
  * A registration context that allows you to register for the WrapperBasedCommandRegistrator.
  *
- * @author maladr0it
+ * @author sc4re
  */
 public class WrapperRegistrationContext implements CommandRegistrationContext<WrapperBasedCommandRegistrator> {
 

@@ -11,7 +11,7 @@ import java.lang.reflect.Type;
 /**
  * Deserializes JSON strings into potion effects.
  *
- * @author maladr0it
+ * @author sc4re
  */
 public final class PotionEffectDeserializer implements JsonDeserializer<PotionEffect> {
 

@@ -3,7 +3,7 @@ package com.aeonicdev.xephyr.generic.sql;
 /**
  * Enum of SQL statement types.
  *
- * @author maladr0it
+ * @author sc4re
  */
 public enum SQLExecutionType {
 

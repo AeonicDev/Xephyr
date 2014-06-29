@@ -3,7 +3,7 @@ package com.aeonicdev.xephyr.generic;
 /**
  * An interface that describes an object that can vary in size.
  *
- * @author maladr0it
+ * @author sc4re
  */
 public interface Sizeable {
 

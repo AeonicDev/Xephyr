@@ -16,7 +16,7 @@ import java.sql.SQLException;
 /**
  * Uses threading and the magic of the Bukkit scheduler to provide an asynchronous SQL framework.
  *
- * @author maladr0it
+ * @author sc4re
  */
 public class AsyncSQL implements SQLStatementWrapper {
 

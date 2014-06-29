@@ -8,7 +8,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 /**
  * Main Xephyr bootstrapping class.
  *
- * @author maladr0it
+ * @author sc4re
  */
 public class Xephyr extends PluginBootstrapper {
 

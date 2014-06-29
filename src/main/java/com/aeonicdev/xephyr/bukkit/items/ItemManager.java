@@ -14,7 +14,7 @@ import java.util.*;
 /**
  * The item manager class that handles registration of all {@link com.aeonicdev.xephyr.bukkit.items.SpecialItem} objects.
  *
- * @author maladr0it
+ * @author sc4re
  */
 public class ItemManager implements ClassBasedManager<SpecialItem>, Enableable {
 

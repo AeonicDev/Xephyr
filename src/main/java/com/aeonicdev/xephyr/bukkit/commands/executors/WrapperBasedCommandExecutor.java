@@ -9,7 +9,7 @@ import net.minecraft.util.org.apache.commons.lang3.Validate;
 /**
  * Executes commands embedded in {@link com.aeonicdev.xephyr.bukkit.commands.registration.wrapper.CommandWrapper} objects.
  *
- * @author maladr0it
+ * @author sc4re
  * @see com.aeonicdev.xephyr.bukkit.commands.registration.wrapper.CommandWrapper
  */
 public class WrapperBasedCommandExecutor implements ICommandExecutor {
