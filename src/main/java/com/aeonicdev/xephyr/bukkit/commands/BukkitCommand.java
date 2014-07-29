@@ -1,7 +1,7 @@
 package com.aeonicdev.xephyr.bukkit.commands;
 
-import net.minecraft.server.v1_7_R3.CommandException;
 import org.bukkit.command.Command;
+import org.bukkit.command.CommandException;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.Plugin;
 
